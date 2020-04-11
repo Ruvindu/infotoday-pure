@@ -1,0 +1,49 @@
+.background{
+	background-image: linear-gradient(to right, rgba(255,255,255,1) 40%, rgba(255,255,255,.5)), url("../imgs/bg.jpg");
+	background-size: cover;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+}
+
+.custom_header {
+	margin-top: 20px;
+}
+
+
+.custom_header td{
+	padding: 5px;
+}
+
+
+.text_width{
+	width: 280px;
+}
+
+.custom_border{
+	border: 1px solid #ddd;
+	border-radius: 7px;
+	width: 340px;
+	padding: 25px;
+}
+
+.signin{
+	margin-top: 60px;
+	margin-left: 20px;
+}
+
+.signup{
+	margin-top: 70px;
+	margin-left: 20px;
+}
+
+.custom_link{
+	color:#363636;
+	text-decoration: blink;
+	border: 0px;
+	border
+}
+
+.custom_link:hover{
+	color:#000;
+	text-decoration: blink;
+}
