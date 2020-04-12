@@ -1,4 +1,64 @@
 <!DOCTYPE html>
+
+<?php
+
+	require_once("inc/connection.php");
+	session_start();
+
+	//sigin in process
+
+	function sign_in($con,$email_or_phone,$password){
+
+		$encryted_pwd = sha1($password);
+
+		$signin_user_q = "SELECT `user_id`, `first_name`, `avatar` FROM `user` WHERE `email` = '{$email_or_phone}' OR `phone` = '{$email_or_phone}' AND `password` = '{$encryted_pwd }'" ;
+
+		$result = mysqli_query($con,$signin_user_q);
+
+		if (mysqli_num_rows($result)>0) {
+
+			$current_user = mysqli_fetch_assoc($result);
+			var_dump($current_user);
+
+			$_SESSION['usr_id'] = $current_user['user_id'];
+			$_SESSION['usr_fname'] = $current_user['first_name'];
+			$_SESSION['usr_avatar'] = $current_user['avatar'];
+			
+			header("location:index.php");
+		}else{
+			echo "<script>alert('Incorrect email or password.')</script>";
+		}
+
+	}
+
+
+	if (isset($_POST['signin'])) {
+		sign_in($con,$_POST['email_or_phone'], $_POST['pwd']);
+	}
+
+
+	//sigm up process
+
+	if (isset($_POST["signup"])) {
+		var_dump($_POST);
+
+		$today = date("Y-m-d");
+		$encryted_pwd = sha1($_POST['pwd']);
+
+		$reg_new_user_q = "INSERT INTO `user`( `first_name`, `last_name`, `role`, `phone`, `email`, `join_date`, `password` ) VALUES ('{$_POST["fname"]}', '{$_POST["lname"]}', 'customer', '{$_POST["phone"]}', '{$_POST["email"]}', '{$today}', '{$encryted_pwd}')";
+
+		if (mysqli_query($con,$reg_new_user_q)) {
+
+			//if user successfuly registerd, then sign in automaticaly
+			sign_in($con,$_POST["email"],$_POST['pwd']);
+
+		}
+	}
+
+?>
+
+
+
 <html>
 <head>
 	<title>InfoToday</title>
@@ -16,6 +76,80 @@
 
 
   	<link rel="stylesheet" type="text/css" href="css/custom.css">
+
+
+
+  	<script type="text/javascript">
+  		
+  		function pre_validate(which_one) {
+  			
+  			if (which_one=="fname") {
+  				//------
+  				var val=document.getElementById("fname").value;  
+  				
+
+  				if (val!="") {
+  					document.getElementById("fname").classList.remove("text_wanning");
+  					document.getElementById("fname").classList.add("text_correct");
+  				}else{
+  					document.getElementById("fname").classList.add("text_wanning");
+  				}
+  				//----
+  			}else if (which_one=="lname") {
+  				//------
+  				var val=document.getElementById("lname").value;  
+  				
+
+  				if (val!="") {
+  					document.getElementById("lname").classList.remove("text_wanning");
+  					document.getElementById("lname").classList.add("text_correct");
+  				}else{
+  					document.getElementById("lname").classList.add("text_wanning");
+  				}
+  				//----
+  			}else if (which_one=="email") {
+  				//------
+  				var val=document.getElementById("email").value;  
+  				
+
+  				if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(val)) {
+  					document.getElementById("email").classList.remove("text_wanning");
+  					document.getElementById("email").classList.add("text_correct");
+  				}else{
+  					document.getElementById("email").classList.add("text_wanning");
+  				}
+  				//----
+  			}else if (which_one=="phone") {
+  				//------
+  				var val=document.getElementById("phone").value;  
+  				
+
+  				if (/^\d{10}$/.test(val)) {
+  					document.getElementById("phone").classList.remove("text_wanning");
+  					document.getElementById("phone").classList.add("text_correct");
+  				}else{
+  					document.getElementById("phone").classList.add("text_wanning");
+  				}
+  				//----
+  			}else if (which_one=="password") {
+  				//------
+  				var val=document.getElementById("pwd").value;  
+  				
+
+  				if (val.length>=7) {
+  					document.getElementById("pwd").classList.remove("text_wanning");
+  					document.getElementById("pwd").classList.add("text_correct");
+  				}else{
+  					document.getElementById("pwd").classList.add("text_wanning");
+  				}
+  				//----
+  			}
+
+  		}
+
+  	</script>
+
+
 </head>
 <body class="background">
 
@@ -59,7 +193,7 @@
 
 			<div class="col-12">
 				<div class="custom_border signin">
-				<form action="login.php" method="post">
+				<form action="sign.php" method="post">
 				<table>
 					<tr>
 						<th colspan="2">
@@ -71,14 +205,14 @@
 					<tr>
 						<td colspan="2">
 							<div class="form-group">
-						    	<input type="Email" name="user_mail" placeholder="Email" class="form-control text_width">
+						    	<input type="text" name="email_or_phone" placeholder="Email or Phone" class="form-control text_width" required>
 						    </div>
 						</td>
 					</tr>
 					<tr>
 						<td colspan="2">
 							<div class="form-group">
-						    	<input type="Password" name="user_mail" placeholder="Password" class="form-control text_width">
+						    	<input type="Password" name="pwd" placeholder="Password" class="form-control text_width" required>
 						    </div>
 						</td>
 					</tr>
@@ -99,8 +233,8 @@
 
 
 
-			<div class="custom_border signup">
-				<form action="/login" method="post">
+			<div class="custom_border signup mb-3">
+				<form action="sign.php" method="post">
 				<table>
 					<tr>
 						<th>
@@ -112,34 +246,42 @@
 					<tr>
 						<td>
 							<div class="form-group">
-						    	<input type="text" name="fname" placeholder="First name" class="form-control text_width">
+						    	<input type="text" name="fname" placeholder="First name" class="form-control text_width " onblur="pre_validate('fname')"  onkeypress="pre_validate('fname')" id="fname" required>
 						    </div>
 						</td>
 					</tr>
 					<tr>
 						<td>
 							<div class="form-group">
-						    	<input type="text" name="lname" placeholder="Last name" class="form-control text_width">
+						    	<input type="text" name="lname" placeholder="Last name" class="form-control text_width" onblur="pre_validate('lname')" onkeypress="pre_validate('lname')" id="lname" required>
 						    </div>
 						</td>
 					</tr>
 					<tr>
 						<td>
 							<div class="form-group">
-						    	<input type="Email" name="email" placeholder="Email" class="form-control text_width">
+						    	<input type="Email" name="email" placeholder="Email" class="form-control text_width" onblur="pre_validate('email')" onkeypress="pre_validate('email')" id="email" required> 
 						    </div>
 						</td>
 					</tr>
 					<tr>
 						<td>
 							<div class="form-group">
-						    	<input type="Password" name="user_mail" placeholder="Password" class="form-control text_width">
+						    	<input type="text" name="phone" placeholder="Phone" class="form-control text_width" onblur="pre_validate('phone')" onkeypress="pre_validate('phone')" id="phone" required>
 						    </div>
 						</td>
 					</tr>
+					<tr>
+						<td>
+							<div class="form-group">
+						    	<input type="Password" name="pwd" placeholder="Password" class="form-control text_width" onkeypress="pre_validate('password')" id="pwd" required>
+						    </div>
+						</td>
+					</tr>
+
 					<tr>
 						<td align="right">
-							<input type="submit" name="signin" value="Sign up" class="btn btn-info">
+							<input type="submit" name="signup" value="Sign up" class="btn btn-info">
 						</td>
 					</tr>
 				</table>

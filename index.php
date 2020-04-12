@@ -1,4 +1,13 @@
 <!DOCTYPE html>
+
+<?php
+
+  require_once("inc/connection.php");
+  session_start();
+
+?>
+
+
 <html>
 <head>
 	<title>InfoToday</title>
@@ -49,6 +58,22 @@
 			</li>
 			</ul>
             <form class="form-inline">
+
+                    <?php
+
+                      if (isset($_SESSION['usr_id'])) {
+                        echo "<a class=\"navbar-brand\" href=\"profile.php\">";
+                        echo "<img src=\"imgs/user.png\" width=\"30\" height=\"30\" class=\"d-inline-block align-top\" alt=\"Avatar\">";
+                        echo "{$_SESSION['usr_fname']}";
+
+                      }else{
+                        echo "<a class=\"navbar-brand\" href=\"sign.php\">";
+                        echo "<img src=\"imgs/user.png\" width=\"30\" height=\"30\" class=\"d-inline-block align-top\" alt=\"Avatar\">";
+                        echo "Sign in";
+                        echo "</a>";
+                      }
+
+                    ?>
             
                     <a class="navbar-brand" href="#">
                     <img src="imgs/user.png" width="30" height="30" class="d-inline-block align-top" alt="">

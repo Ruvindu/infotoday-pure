@@ -47,3 +47,25 @@
 	color:#000;
 	text-decoration: blink;
 }
+
+
+.text_correct{
+
+	background-image: url("../imgs/correct.png");
+	background-repeat: no-repeat;
+	background-size: 25px;
+	background-position: right;
+	padding-right: 25px;
+
+}
+
+
+.text_wanning{
+
+	background-image: url("../imgs/warnning.png");
+	background-repeat: no-repeat;
+	background-size: 25px;
+	background-position: right;
+	padding-right: 25px;
+
+}

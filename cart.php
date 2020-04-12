@@ -51,7 +51,7 @@
             <form class="form-inline">
             
                     <a class="navbar-brand" href="#">
-                    <img src="/imgs/user.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                    <img src="imgs/user.png" width="30" height="30" class="d-inline-block align-top" alt="">
                     Sign in
                     </a>
 
@@ -62,69 +62,56 @@
         </nav>
 
 
-        <div class="container-fluid">
+        <div class="container">
             
             <div class="row mt-4">
-                <div class="col-md-4">
-                   
-                  <div class="card" style="width: 18rem;">
-                      <img class="card-img-top p-2" src="imgs/users/user.png" alt="Card image cap">
-                      <div class="card-body">
-                        <a href="#" class="btn btn-primary">Change photo</a>
-                        <a href="#" class="btn btn-danger">Remove</a>
-                      </div>
-                    </div>
-
-                    <div class="card mt-3" style="width: 18rem;">
-                            <div class="card-body">
-                              <h5 class="card-title">Name</h5>
-                              <p class="card-text">
-                                Address :<br>
-                                Phone :<br>
-                                Email :<br>
-                                Joind :<br>
-                              </p>
-                              <a href="#" class="btn btn-primary">Edit privacy</a>
-                            </div>
-                    </div>
-
-
-                    <div class="card mt-3" style="width: 18rem;">
-                            <div class="card-body">
-                              <h5 class="card-title">Change  password</h5>
-                              <form action="profile.php" method="post">
-                                <div class="form-group">
-                                  <input type="text" class="form-control" id="currentpwd" placeholder="Current password">
-                                </div>
-                                <div class="form-group">
-                                  <input type="text" class="form-control" id="newpwd"  placeholder="New password">
-                                </div>
-                                <div class="form-group">
-                                  <input type="text" class="form-control" id="confirmpwd" placeholder="Confirm password">
-                                </div>
-                              </form>
-                              <a href="#" class="btn btn-primary">Save changes</a>
-                            </div>
-                    </div>
-
-
-                    <div class="card mt-3 mb-3" style="width: 18rem;">
-                            <div class="card-body">
-                              <h5 class="card-title">Change account type</h5>
-                              <p class="card-text">
-                               Change your customer account as a <a href="#" >publisher</a>.
-                              </p>
-                              
-                            </div>
-                    </div>
-
-
-                </div>
-
-                <div class="col-md-8">
+               
+                <div class="col-md-12">
                     
 
-                    
+                    <div class="card-deck mt-3">
+
+                          <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="imgs/products/1.jpg" alt="Card image cap">
+                            <div class="card-body">
+                              <h5 class="card-title">Pariganaka</h5>
+                              <p class="card-text">Wijaya pariganaka monthly magazine,<b>September 2018</b></p>
+                              <a href="#" class="btn btn-primary">Preview</a>
+                              <a href="#" class="btn btn-danger">Add to cart</a>
+                            </div>
+                          </div>
+
+                          <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="imgs/products/2.jpg" alt="Card image cap">
+                            <div class="card-body">
+                              <h5 class="card-title">Pariganaka</h5>
+                              <p class="card-text">Wijaya pariganaka monthly magazine,<b> February 2016</b></p>
+                              <a href="#" class="btn btn-primary">Preview</a>
+                              <a href="#" class="btn btn-danger">Add to cart</a>
+                            </div>
+                          </div>
+
+                          <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="imgs/products/3.jpg" alt="Card image cap">
+                            <div class="card-body">
+                              <h5 class="card-title">Pariganaka</h5>
+                              <p class="card-text">Wijaya pariganaka monthly magazine,<b> January 2019</b></p>
+                              <a href="#" class="btn btn-primary">Preview</a>
+                              <a href="#" class="btn btn-danger">Add to cart</a>
+                            </div>
+                          </div>
+
+                           <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="imgs/products/3.jpg" alt="Card image cap">
+                            <div class="card-body">
+                              <h5 class="card-title">Pariganaka</h5>
+                              <p class="card-text">Wijaya pariganaka monthly magazine,<b> January 2020</b></p>
+                              <a href="#" class="btn btn-primary">Preview</a>
+                              <a href="#" class="btn btn-danger">Add to cart</a>
+                            </div>
+                          </div>
+                          
+                    </div>
 
                     
                 </div>
