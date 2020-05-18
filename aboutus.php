@@ -44,13 +44,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
-			<li class="nav-item ">
+			<li class="nav-item">
 				<a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
 			</li>
-			<li class="nav-item active">
+			<li class="nav-item">
 				<a class="nav-link" href="cart.php">Cart</a>
 			</li>
-			<li class="nav-item">
+			<li class="nav-item active">
 				<a class="nav-link" href="aboutus.php">About us</a>
 			</li>
 
@@ -102,62 +102,72 @@
         <div class="container">
             
             <div class="row mt-4">
-               
-                <div class="col-md-12">
+
+                <div class="col-md-6">
+                    <h3 class="mb-3">Feedback</h3>
+                    <form action="aboutus.php" method="post">
+                    <table cellpadding="4">
+                      <tr>
+                        <td>
+                          <div class="form-group">
+                            <input type="text" name="username" placeholder="Name" class="form-control text_width1" required>
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td> 
+                          <div class="form-group">
+                            <input type="text" name="email" placeholder="Email" class="form-control text_width1" required>
+                          </div>
+                        </td>
+                       
+                      </tr>
+
+                      <tr>
+                        <td>
+
+                          <div class="form-group">
+                            <textarea name="message" rows="5" placeholder="Type your message..." class="form-control text_width1" required></textarea> 
+                          </div>
+
+                        </td>
+                      </tr>
                     
-
-                    <div class="card-deck mt-3">
-
-                          <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="imgs/products/1.jpg" alt="Card image cap">
-                            <div class="card-body">
-                              <h5 class="card-title">Pariganaka</h5>
-                              <p class="card-text">Wijaya pariganaka monthly magazine,<b>September 2018</b></p>
-                              <a href="#" class="btn btn-primary">Preview</a>
-                              <a href="#" class="btn btn-danger">Add to cart</a>
-                            </div>
+                      <tr>
+                        <td align="right"> 
+                          <div class="form-group">
+                            <input type="submit" name="send" value="Send" class="btn btn-info" required>
                           </div>
+                        </td>
+                       
+                      </tr>
 
-                          <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="imgs/products/2.jpg" alt="Card image cap">
-                            <div class="card-body">
-                              <h5 class="card-title">Pariganaka</h5>
-                              <p class="card-text">Wijaya pariganaka monthly magazine,<b> February 2016</b></p>
-                              <a href="#" class="btn btn-primary">Preview</a>
-                              <a href="#" class="btn btn-danger">Add to cart</a>
-                            </div>
-                          </div>
 
-                          <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="imgs/products/3.jpg" alt="Card image cap">
-                            <div class="card-body">
-                              <h5 class="card-title">Pariganaka</h5>
-                              <p class="card-text">Wijaya pariganaka monthly magazine,<b> January 2019</b></p>
-                              <a href="#" class="btn btn-primary">Preview</a>
-                              <a href="#" class="btn btn-danger">Add to cart</a>
-                            </div>
-                          </div>
-
-                           <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="imgs/products/3.jpg" alt="Card image cap">
-                            <div class="card-body">
-                              <h5 class="card-title">Pariganaka</h5>
-                              <p class="card-text">Wijaya pariganaka monthly magazine,<b> January 2020</b></p>
-                              <a href="#" class="btn btn-primary">Preview</a>
-                              <a href="#" class="btn btn-danger">Add to cart</a>
-                            </div>
-                          </div>
-                          
-                    </div>
-
-                    
+                    </table>
+                  </form>
+                   
                 </div>
 
+                <div class="col-md-6">
+                  <table>
+                    <tr>
+                      <th>Contact us</th>
+                    </tr>
+                    <tr>
+                      <td>infotoday@gmail.com</td>
+                    </tr>
+                    <tr>
+                      <td>+94784446639</td>
+                    </tr>
+                  </table>
+                </div>
 
+              
+                          
             </div>
 
-            
-
+                    
         </div>
 
 

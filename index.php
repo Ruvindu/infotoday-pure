@@ -31,7 +31,7 @@
         <!-- Image and text -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="index.php">
             <img src="imgs/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
             InfoToday
         </a>
@@ -45,26 +45,42 @@
         <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
 			<li class="nav-item active">
-				<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+				<a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#">Cart</a>
+				<a class="nav-link" href="cart.php">Cart</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#">Brought</a>
+				<a class="nav-link" href="aboutus.php">About us</a>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">About us</a>
-			</li>
+
+      <?php
+
+        if (isset($_SESSION['usr_id'])) {
+          echo "<li class=\"nav-item\">";
+          echo "<a class=\"nav-link\" href=\"signout.php\">Sign out</a>";
+          echo "</li>";
+        }
+        
+      ?>
+
+
 			</ul>
-            <form class="form-inline">
+            
 
                     <?php
 
                       if (isset($_SESSION['usr_id'])) {
                         echo "<a class=\"navbar-brand\" href=\"profile.php\">";
-                        echo "<img src=\"imgs/user.png\" width=\"30\" height=\"30\" class=\"d-inline-block align-top\" alt=\"Avatar\">";
+
+                        if ($_SESSION['usr_avatar']!="") {
+                         echo "<img src=\"{$_SESSION['usr_avatar']}\" width=\"30\" height=\"30\" class=\"d-inline-block align-top\" alt=\"Avatar\">";
+                        }else{
+                           echo "<img src=\"imgs/user.png\" width=\"30\" height=\"30\" class=\"d-inline-block align-top\" alt=\"Avatar\">";
+                        }
+                        
                         echo "{$_SESSION['usr_fname']}";
+                        echo "</a>";
 
                       }else{
                         echo "<a class=\"navbar-brand\" href=\"sign.php\">";
@@ -75,11 +91,7 @@
 
                     ?>
             
-                    <a class="navbar-brand" href="#">
-                    <img src="imgs/user.png" width="30" height="30" class="d-inline-block align-top" alt="">
-                    Sign in
-                    </a>
-
+            <form class="form-inline">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
             </form>
