@@ -99,66 +99,21 @@
         </nav>
 
 
-        <div class="container">
-            
-            <div class="row mt-4">
-               
-                <div class="col-md-12">
-                    
-
-                    <div class="card-deck mt-3">
-
-                          <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="imgs/products/1.jpg" alt="Card image cap">
-                            <div class="card-body">
-                              <h5 class="card-title">Pariganaka</h5>
-                              <p class="card-text">Wijaya pariganaka monthly magazine,<b>September 2018</b></p>
-                              <a href="#" class="btn btn-primary">Preview</a>
-                              <a href="#" class="btn btn-danger">Add to cart</a>
-                            </div>
-                          </div>
-
-                          <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="imgs/products/2.jpg" alt="Card image cap">
-                            <div class="card-body">
-                              <h5 class="card-title">Pariganaka</h5>
-                              <p class="card-text">Wijaya pariganaka monthly magazine,<b> February 2016</b></p>
-                              <a href="#" class="btn btn-primary">Preview</a>
-                              <a href="#" class="btn btn-danger">Add to cart</a>
-                            </div>
-                          </div>
-
-                          <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="imgs/products/3.jpg" alt="Card image cap">
-                            <div class="card-body">
-                              <h5 class="card-title">Pariganaka</h5>
-                              <p class="card-text">Wijaya pariganaka monthly magazine,<b> January 2019</b></p>
-                              <a href="#" class="btn btn-primary">Preview</a>
-                              <a href="#" class="btn btn-danger">Add to cart</a>
-                            </div>
-                          </div>
-
-                           <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="imgs/products/3.jpg" alt="Card image cap">
-                            <div class="card-body">
-                              <h5 class="card-title">Pariganaka</h5>
-                              <p class="card-text">Wijaya pariganaka monthly magazine,<b> January 2020</b></p>
-                              <a href="#" class="btn btn-primary">Preview</a>
-                              <a href="#" class="btn btn-danger">Add to cart</a>
-                            </div>
-                          </div>
-                          
-                    </div>
-
-                    
-                </div>
-
-
-            </div>
-
-            
-
+        <div class="container" >
+          <div class="row">
+         
+          <div class="card-deck">
+            <div class="card" >
+              <img src="logo.png">
+            </div> 
+            <div class="card">
+              <img src="imgs/logo.png">
+            </div>  
+          </div>
+          </div>
+          
         </div>
+
 
 
 
