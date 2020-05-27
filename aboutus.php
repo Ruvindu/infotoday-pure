@@ -161,6 +161,14 @@
                       <td>+94784446639</td>
                     </tr>
                   </table>
+                  <table class="social mt-3" cellpadding="3px">
+                    <tr>
+                      <td><img src="imgs/fb.png" width="50px" height="50px"></td>
+                      <td><img src="imgs/twitter.png" width="50px" height="50px"></td>
+                      <td><img src="imgs/instagram.png" width="50px" height="50px"></td>
+                      <td><img src="imgs/google.png" width="50px" height="50px"></td>
+                    </tr>
+                  </table>
                 </div>
 
               
