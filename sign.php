@@ -11,7 +11,7 @@
 
 		$encryted_pwd = sha1($password);
 
-		$signin_user_q = "SELECT `user_id`, 'role', `first_name`, `avatar` FROM `user` WHERE `email` = '{$email_or_phone}' OR `phone` = '{$email_or_phone}' AND `password` = '{$encryted_pwd }'" ;
+		$signin_user_q = "SELECT `user_id`, `role`, `first_name`, `avatar` FROM `user` WHERE `email` = '{$email_or_phone}' OR `phone` = '{$email_or_phone}' AND `password` = '{$encryted_pwd }'" ;
 
 		$result = mysqli_query($con,$signin_user_q);
 
@@ -41,12 +41,13 @@
 	//sigm up process
 
 	if (isset($_POST["signup"])) {
-		var_dump($_POST);
 
 		$today = date("Y-m-d");
 		$encryted_pwd = sha1($_POST['pwd']);
 
-		$reg_new_user_q = "INSERT INTO `user`( `first_name`, `last_name`, `role`, `phone`, `email`, `join_date`, `password` ) VALUES ('{$_POST["fname"]}', '{$_POST["lname"]}', 'customer', '{$_POST["phone"]}', '{$_POST["email"]}', '{$today}', '{$encryted_pwd}')";
+		$reg_new_user_q = "INSERT INTO `user`( `first_name`, `last_name`, `role`, `phone`, `email`, `join_date`, `avatar`, `password` ) VALUES ('{$_POST["fname"]}', '{$_POST["lname"]}', 'customer', '{$_POST["phone"]}', '{$_POST["email"]}', '{$today}', 'imgs\\\\users\\\\user.png' ,'{$encryted_pwd}')";
+
+		echo $reg_new_user_q;
 
 		if (mysqli_query($con,$reg_new_user_q)) {
 

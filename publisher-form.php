@@ -56,6 +56,15 @@
 
       <?php
 
+        if (isset($_SESSION['role'])){
+
+          if (strcmp($_SESSION['role'], "supplier") == 0) {
+            echo "<li class=\"nav-item\">";
+            echo "<a class=\"nav-link\" href=\"publisher-form.php\">Publish New</a>";
+            echo "</li>";
+          }
+        } 
+
         if (isset($_SESSION['usr_id'])) {
           echo "<li class=\"nav-item\">";
           echo "<a class=\"nav-link\" href=\"signout.php\">Sign out</a>";
@@ -104,8 +113,8 @@
             <div class="row mt-4">
 
                 <div class="col-md-6">
-                    <h3 class="mb-3">Feedback</h3>
-                    <form action="aboutus.php" method="post">
+                    <h3 class="mb-3">Publisher form</h3>
+                    <form action="publisher-form.php" method="post">
                     <table cellpadding="4">
                       <tr>
                         <td>
@@ -150,25 +159,7 @@
                 </div>
 
                 <div class="col-md-6">
-                  <table>
-                    <tr>
-                      <th>Contact us</th>
-                    </tr>
-                    <tr>
-                      <td>infotoday@gmail.com</td>
-                    </tr>
-                    <tr>
-                      <td>+94784446639</td>
-                    </tr>
-                  </table>
-                  <table class="social mt-3" cellpadding="3px">
-                    <tr>
-                      <td><img src="imgs/fb.png" width="50px" height="50px"></td>
-                      <td><img src="imgs/twitter.png" width="50px" height="50px"></td>
-                      <td><img src="imgs/instagram.png" width="50px" height="50px"></td>
-                      <td><img src="imgs/google.png" width="50px" height="50px"></td>
-                    </tr>
-                  </table>
+                 
                 </div>
 
               

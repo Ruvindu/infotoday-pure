@@ -69,6 +69,15 @@
 
       <?php
 
+         if (isset($_SESSION['role'])){
+
+          if (strcmp($_SESSION['role'], "supplier") == 0) {
+            echo "<li class=\"nav-item\">";
+            echo "<a class=\"nav-link\" href=\"publisher-form.php\">Publish New</a>";
+            echo "</li>";
+          }
+        } 
+
         if (isset($_SESSION['usr_id'])) {
           echo "<li class=\"nav-item\">";
           echo "<a class=\"nav-link\" href=\"signout.php\">Sign out</a>";
@@ -161,9 +170,20 @@
                     <div class="card mt-3 mb-3" style="width: 18rem;">
                             <div class="card-body">
                               <h5 class="card-title">Change account type</h5>
-                              <p class="card-text">
-                               Change your customer account as a <a  <?php echo "href=\"profile.php?user={$_SESSION['usr_id']}\""; ?>    >publisher</a>.
-                              </p>
+
+                              <?php
+
+                                if ( strcmp($_SESSION['role'], "supplier") == 0) {
+                                  echo "You are already Publisher. Publisher account can't change to customer account.";
+                                }else{
+                                  
+                                  echo "
+                                      <p class=\"card-text\">
+                                      Change your customer account as a <a href=\"profile.php?user={$_SESSION['usr_id']}\" ; >publisher</a>.
+                                      </p>
+                                  ";
+                                }
+                              ?>
                               
                             </div>
                     </div>
