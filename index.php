@@ -56,6 +56,12 @@
 
       <?php
 
+        if (isset($_SESSION[''])) {
+          echo "<li class=\"nav-item\">";
+          echo "<a class=\"nav-link\" href=\"signout.php\">Sign out</a>";
+          echo "</li>";
+        }
+
         if (isset($_SESSION['usr_id'])) {
           echo "<li class=\"nav-item\">";
           echo "<a class=\"nav-link\" href=\"signout.php\">Sign out</a>";

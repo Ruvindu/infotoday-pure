@@ -11,7 +11,7 @@
 
 		$encryted_pwd = sha1($password);
 
-		$signin_user_q = "SELECT `user_id`, `first_name`, `avatar` FROM `user` WHERE `email` = '{$email_or_phone}' OR `phone` = '{$email_or_phone}' AND `password` = '{$encryted_pwd }'" ;
+		$signin_user_q = "SELECT `user_id`, 'role', `first_name`, `avatar` FROM `user` WHERE `email` = '{$email_or_phone}' OR `phone` = '{$email_or_phone}' AND `password` = '{$encryted_pwd }'" ;
 
 		$result = mysqli_query($con,$signin_user_q);
 
@@ -23,6 +23,7 @@
 			$_SESSION['usr_id'] = $current_user['user_id'];
 			$_SESSION['usr_fname'] = $current_user['first_name'];
 			$_SESSION['usr_avatar'] = $current_user['avatar'];
+			$_SESSION['role'] = $current_user['role'];
 			
 			header("location:index.php");
 		}else{

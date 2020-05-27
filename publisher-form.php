@@ -5,19 +5,6 @@
   require_once("inc/connection.php");
   session_start();
 
-  /*Create publisher account*/
-
-  if (isset($_GET['user'])) {
-    
-    $update_usertypeQ = "UPDATE `user` SET `role`='supplier' WHERE `user_id` = {$_GET['user']}";
-
-    
-    if (mysqli_query($con,$update_usertypeQ)) {
-      echo "<script>alert('Your account coverted to publisher account.');</script>";
-    }
-  }
-
-
 ?>
 
 
@@ -41,7 +28,7 @@
 
 <body class="background">
 
-         <!-- Image and text -->
+        <!-- Image and text -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
         <a class="navbar-brand" href="index.php">
@@ -57,15 +44,15 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="cart.php">Cart</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="aboutus.php">About us</a>
-      </li>
+			<li class="nav-item">
+				<a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="cart.php">Cart</a>
+			</li>
+			<li class="nav-item active">
+				<a class="nav-link" href="aboutus.php">About us</a>
+			</li>
 
       <?php
 
@@ -78,7 +65,7 @@
       ?>
 
 
-      </ul>
+			</ul>
             
 
                     <?php
@@ -112,78 +99,83 @@
         </nav>
 
 
-        <div class="container-fluid">
+        <div class="container">
             
             <div class="row mt-4">
-                <div class="col-md-4">
+
+                <div class="col-md-6">
+                    <h3 class="mb-3">Feedback</h3>
+                    <form action="aboutus.php" method="post">
+                    <table cellpadding="4">
+                      <tr>
+                        <td>
+                          <div class="form-group">
+                            <input type="text" name="username" placeholder="Name" class="form-control text_width1" required>
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td> 
+                          <div class="form-group">
+                            <input type="text" name="email" placeholder="Email" class="form-control text_width1" required>
+                          </div>
+                        </td>
+                       
+                      </tr>
+
+                      <tr>
+                        <td>
+
+                          <div class="form-group">
+                            <textarea name="message" rows="5" placeholder="Type your message..." class="form-control text_width1" required></textarea> 
+                          </div>
+
+                        </td>
+                      </tr>
+                    
+                      <tr>
+                        <td align="right"> 
+                          <div class="form-group">
+                            <input type="submit" name="send" value="Send" class="btn btn-info" required>
+                          </div>
+                        </td>
+                       
+                      </tr>
+
+
+                    </table>
+                  </form>
                    
-                  <div class="card" style="width: 18rem;">
-                      <img class="card-img-top p-2" src="imgs/users/user.png" alt="Card image cap">
-                      <div class="card-body">
-                        <a href="#" class="btn btn-primary">Change photo</a>
-                        <a href="#" class="btn btn-danger">Remove</a>
-                      </div>
-                    </div>
-
-                    <div class="card mt-3" style="width: 18rem;">
-                            <div class="card-body">
-                              <h5 class="card-title">Name</h5>
-                              <p class="card-text">
-                                Address :<br>
-                                Phone :<br>
-                                Email :<br>
-                                Joind :<br>
-                              </p>
-                              <a href="#" class="btn btn-primary">Edit privacy</a>
-                            </div>
-                    </div>
-
-
-                    <div class="card mt-3" style="width: 18rem;">
-                            <div class="card-body">
-                              <h5 class="card-title">Change  password</h5>
-                              <form action="profile.php" method="post">
-                                <div class="form-group">
-                                  <input type="text" class="form-control" id="currentpwd" placeholder="Current password">
-                                </div>
-                                <div class="form-group">
-                                  <input type="text" class="form-control" id="newpwd"  placeholder="New password">
-                                </div>
-                                <div class="form-group">
-                                  <input type="text" class="form-control" id="confirmpwd" placeholder="Confirm password">
-                                </div>
-                              </form>
-                              <a href="#" class="btn btn-primary">Save changes</a>
-                            </div>
-                    </div>
-
-
-                    <div class="card mt-3 mb-3" style="width: 18rem;">
-                            <div class="card-body">
-                              <h5 class="card-title">Change account type</h5>
-                              <p class="card-text">
-                               Change your customer account as a <a  <?php echo "href=\"profile.php?user={$_SESSION['usr_id']}\""; ?>    >publisher</a>.
-                              </p>
-                              
-                            </div>
-                    </div>
-
-
                 </div>
 
-                <div class="col-md-8">
-                    
-
-                    
-
-                    
+                <div class="col-md-6">
+                  <table>
+                    <tr>
+                      <th>Contact us</th>
+                    </tr>
+                    <tr>
+                      <td>infotoday@gmail.com</td>
+                    </tr>
+                    <tr>
+                      <td>+94784446639</td>
+                    </tr>
+                  </table>
+                  <table class="social mt-3" cellpadding="3px">
+                    <tr>
+                      <td><img src="imgs/fb.png" width="50px" height="50px"></td>
+                      <td><img src="imgs/twitter.png" width="50px" height="50px"></td>
+                      <td><img src="imgs/instagram.png" width="50px" height="50px"></td>
+                      <td><img src="imgs/google.png" width="50px" height="50px"></td>
+                    </tr>
+                  </table>
                 </div>
 
-
+              
+                          
             </div>
 
-            
-
+                    
         </div>
 
 
