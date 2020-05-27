@@ -98,23 +98,48 @@
         </div>
         </nav>
 
-
+        <br><br>
         <div class="container" >
           <div class="row">
-         
-          <div class="card-deck">
-            <div class="card" >
-              <img src="logo.png">
+            <div class="card-deck ">
+             <div class="card text-center " style="width: 700px; background-color: rgba(245, 245, 245, -5);" >
+
+               <?php
+                $cartQuery="SELECT newspaper.*,user.*,cart.* FROM cart,newspaper,user where cart.user_id=user.user_id and cart.newspaper_id=newspaper.newspaper_id group by cart.cart_id";
+                  $CartResult=mysqli_query($con,$cartQuery);
+                  while($Cartrecord=mysqli_fetch_assoc($CartResult)){
+               ?>
+
+
+                <br>
+                <div class="card " style="height: 200; width: 250px; ">         
+                  <div class="card-header" style="height: 280px; width: 250px;">
+                      <br>
+                      <img src="data:upload/jpeg;base64,<?php echo base64_encode($Cartrecord['thumbnail']);?>" class="mx-auto center-block img-fluid"style="height: 200px; width: auto;">
+                  </div>
+                  <div class="card-body" style="height: 100px; width: 250px;"> 
+                      <b><p style="margin-top: -10px;"><?php echo $Cartrecord['name'];  ?></p></b>
+                       <p style="margin-top: -20px;"><?php echo $Cartrecord['description'];  ?></p>
+
+                  </div> 
+                  <div class="card-footer" style="height:auto; width: 250px;">
+                      <button class="btn btn-success">Add</button>
+                  </div>  
+                </div>               
+                      <br><br>
+
+              <?php
+                }
+              ?>
+            
             </div> 
-            <div class="card">
-              <img src="imgs/logo.png">
+            <div class="card" style="width: 700px; background-color: rgba(245, 245, 245, -5);opacity: .9;">
+              <p>sdsdsdd</p>
             </div>  
-          </div>
-          </div>
           
+          </div>
         </div>
-
-
+      </div>
 
 
 
