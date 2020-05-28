@@ -56,6 +56,15 @@
 
       <?php
 
+         if (isset($_SESSION['role'])){
+
+          if (strcmp($_SESSION['role'], "supplier") == 0) {
+            echo "<li class=\"nav-item\">";
+            echo "<a class=\"nav-link\" href=\"publisher-form.php\">Publish New</a>";
+            echo "</li>";
+          }
+        }  
+
         if (isset($_SESSION['usr_id'])) {
           echo "<li class=\"nav-item\">";
           echo "<a class=\"nav-link\" href=\"signout.php\">Sign out</a>";

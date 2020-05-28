@@ -172,7 +172,7 @@
                               <h5 class="card-title">Change account type</h5>
 
                               <?php
-                                
+                                echo $_SESSION['role'];
                                 if ( strcmp($_SESSION['role'], "supplier") == 0) {
                                   echo "You are already Publisher. Publisher account can't change to customer account.";
                                 }else{
