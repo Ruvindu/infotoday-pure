@@ -98,23 +98,81 @@
         </div>
         </nav>
 
-
+        <br><br>
         <div class="container" >
           <div class="row">
-         
-          <div class="card-deck">
-            <div class="card" >
-              <img src="logo.png">
+            <div class="card-deck ">
+             <div class="card text-center " style="width: 700px; background-color: rgba(245, 245, 245, -5);" >
+
+               <?php
+                $cartQuery="SELECT newspaper.*,user.*,cart.* FROM cart,newspaper,user where cart.user_id=user.user_id and cart.newspaper_id=newspaper.newspaper_id group by cart.cart_id";
+                  $CartResult=mysqli_query($con,$cartQuery);
+                  while($Cartrecord=mysqli_fetch_assoc($CartResult))
+                  {
+
+                  //-----------------------------------Loop for Cart --------------------------------------------------------------------------------------  
+               ?>
+
+
+                  <br>
+                    <div class="card " style="height: 200; width: 250px; ">         
+                      <div class="card-header" style="height: 280px; width: 250px;">
+                        <br>
+                         <img src="data:upload/jpeg;base64,<?php echo base64_encode($Cartrecord['thumbnail']);?>" class="mx-auto center-block img-fluid"style="height: 200px; width: auto;">
+                        </div>
+                        <div class="card-body" style="height: 120px; width: 250px;"> 
+                          <b><p style="margin-top: -10px;"><?php echo $Cartrecord['name'];  ?></p></b>
+                            <p style="margin-top: -20px;"><?php echo $Cartrecord['description'];  ?></p>
+                          <b><p>Rs. <?php echo $Cartrecord['gross_price'];  ?></p></b>
+
+                        </div> 
+                  
+                    </div>               
+                  <br><br>
+
+              <?php
+              //----------------------------------------------------------------------------------------------------------------------------------------------
+                }
+              ?>
+            
             </div> 
-            <div class="card">
-              <img src="imgs/logo.png">
+            <div class="card" style="width: 700px; background-color: rgba(245, 245, 245, -5);">
+              <table>
+                  <tr>
+                    <h2>Cart</h2>
+                  </tr>
+                  <tr>
+                    <th>Product</th>
+                    <th width="10px">&nbsp;</th>
+                    <th>Amount</th>
+                  </tr>
+                 <?php
+                   $total =0;
+                   $cartQuery="SELECT newspaper.*,user.*,cart.* FROM cart,newspaper,user where cart.user_id=user.user_id and cart.newspaper_id=newspaper.newspaper_id group by cart.cart_id";
+                   $CartResult=mysqli_query($con,$cartQuery);
+                   while ($Cartrecord=mysqli_fetch_assoc($CartResult)) {
+                  
+                
+                ?>
+                 <tr>
+                 <?php  $total=$total+ $Cartrecord['gross_price'];  ?>
+                    <td><?php echo $Cartrecord['name'];  ?></td>
+                    <td width="10px">&nbsp;</td>
+                    <td>Rs. <?php  echo $Cartrecord['gross_price']; ?></td>
+                </tr>
+                <?php } ?>
+                <tr >
+                    
+                    <td style="font-size: 26px;">
+                        Total :Rs. <?php  echo $total; ?>
+                    </td>
+                </tr>
+              </table>
             </div>  
-          </div>
-          </div>
           
+          </div>
         </div>
-
-
+      </div>
 
 
 
