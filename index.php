@@ -114,7 +114,7 @@
             <div class="row mt-4">
                 <div class="col-md-3">
                     <h3>Categories</h3>
-
+                    
                     <div id="accordion" class="mt-4 mb-4">
                       <div class="card">
                         <div class="card-header" id="headingOne">
@@ -127,6 +127,7 @@
 
                         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                           <div class="card-body">
+                            <form method="POST" action="">
                             <button class="btn btn-link custom_link"  data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                               Pet Life
                             </button><br>
@@ -136,6 +137,7 @@
                             <button class="btn btn-link custom_link"  data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                               Dog Fancy
                             </button><br>
+                            </form>
                             
                           </div>
                         </div>
@@ -155,7 +157,7 @@
                               Sport Today(SL)
                             </button><br>
                             <button class="btn btn-link custom_link"  data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                              Top Gear
+                              Top Gear <?php ?>
                             </button><br>
                             <button class="btn btn-link custom_link"  data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                               Doctor(SL)
@@ -186,7 +188,7 @@
                         </div>
                       </div>
                     </div>
-
+                    
                 </div>
 
                 <div class="col-md-9">
@@ -236,6 +238,12 @@
 
 
                     <div class="card-deck mt-3">
+                      <?phpif(isset($_POST['AddToPurches']))
+                        {
+                          $Categories="SELECT * FROM newspaper,category where newspaper.category_id=category.category_id and category.category_name='".$catname."'";
+                          $result=mysqli_query($conn,$SQuery);
+                        }
+                        ?>
                           <div class="card" style="width: 18rem;">
                             <img class="card-img-top" src="imgs/products/1.jpg" alt="Card image cap">
                             <div class="card-body">
@@ -245,8 +253,9 @@
                               <a href="#" class="btn btn-danger">Add to cart</a>
                             </div>
                           </div>
+                      <?php  ?>    
 
-                          <div class="card" style="width: 18rem;">
+                          <!--div class="card" style="width: 18rem;">
                             <img class="card-img-top" src="imgs/products/2.jpg" alt="Card image cap">
                             <div class="card-body">
                               <h5 class="card-title">Pariganaka</h5>
@@ -274,7 +283,7 @@
                               <a href="#" class="btn btn-primary">Preview</a>
                               <a href="#" class="btn btn-danger">Add to cart</a>
                             </div>
-                          </div>
+                          </div-->
                           
                     </div>
 
