@@ -5,6 +5,13 @@
   require_once("inc/connection.php");
   session_start();
 
+
+  if (isset($_POST['publish'])) {
+    var_dump($_POST);
+    var_dump($_FILES);
+  }
+
+
 ?>
 
 
@@ -114,43 +121,105 @@
 
                 <div class="col-md-6">
                     <h3 class="mb-3">Publisher form</h3>
-                    <form action="publisher-form.php" method="post">
+                    <form action="publisher-form.php" method="post" enctype="multipart/form-data">
                     <table cellpadding="4">
-                      <tr>
-                        <td>
-                          <div class="form-group">
-                            <input type="text" name="username" placeholder="Name" class="form-control text_width1" required>
-                          </div>
-                        </td>
-                      </tr>
-
-                      <tr>
-                        <td> 
-                          <div class="form-group">
-                            <input type="text" name="email" placeholder="Email" class="form-control text_width1" required>
-                          </div>
-                        </td>
-                       
-                      </tr>
 
                       <tr>
                         <td>
-
                           <div class="form-group">
-                            <textarea name="message" rows="5" placeholder="Type your message..." class="form-control text_width1" required></textarea> 
-                          </div>
+                            
+                            <select name="category" class="form-control text_width1" required>
+                              <option disabled selected>Select category</option>
+                              
+                              <?php 
 
+                                  $get_catsQ = "SELECT * FROM `category`";
+
+                                  $res_cats = mysqli_query($con, $get_catsQ);
+
+                                  if ($res_cats) {
+                                    
+                                     while($cat = mysqli_fetch_assoc($res_cats)){
+                                        echo "<option value={$cat['category_id']}> {$cat['category_name']} </option>";
+                                     }
+                                  }
+
+
+                               ?>
+
+                            </select>
+
+                          </div>
                         </td>
                       </tr>
-                    
+
+
+                      <tr>
+                        <td>
+                          <div class="form-group">
+                            <input type="text" name="newspaper_name" placeholder="Name of Newspaper or Magazin" class="form-control text_width1" required>
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <div class="form-group">
+                            
+                            <select name="category" class="form-control text_width1" required>
+                              <option disabled selected>Select duration</option>
+                              <option value="Daily" >Daily</option>
+                              <option value="Weekly" >Weekly</option>
+                              <option value="Monthly" >Monthly</option>
+                            </select>
+
+                          </div>
+                        </td>
+                      </tr>
+
+
+                      <tr>
+                        <td>
+                          <div class="form-group">
+                            <textarea name="description" rows="5" placeholder="Type Description here..." class="form-control text_width1" required></textarea> 
+                          </div>
+                        </td>
+                      </tr>
+
+          
+                      <tr>
+                        <td>
+                          <div class="form-group">
+                             <input name="date" placeholder="Date" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control text_width1" required>
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          <div class="form-group">
+                             Thumbnail : <input type="file" name="thumbnail" accept="image/*" id="fileToUpload" required> 
+                          </div>
+                        </td>
+                      </tr>
+
+                       <tr>
+                        <td>
+                          <div class="form-group">
+                             File : <input type="file" name="file" accept=".pdf" id="fileToUpload" required>
+                          </div>
+                        </td>
+                      </tr>
+
                       <tr>
                         <td align="right"> 
                           <div class="form-group">
-                            <input type="submit" name="send" value="Send" class="btn btn-info" required>
+                            <input type="submit" name="publish" value="Publish now" class="btn btn-info" required>
                           </div>
                         </td>
-                       
                       </tr>
+
+
 
 
                     </table>
