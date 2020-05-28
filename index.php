@@ -127,18 +127,20 @@
 
                         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                           <div class="card-body">
-                            <form method="POST" action="">
+                            <?php
+                              $catname="pets_and_animal";
+                              $Pets_cartegory="SELECT newspaper.name FROM newspaper,category where category.category_id=newspaper.category_id and category.category_name='".$catname."'";
+                              $PetsResult=mysqli_query($con,$Pets_cartegory);
+                              while($Petsrecord=mysqli_fetch_assoc($PetsResult))
+                                 {
+                            ?>
                             <button class="btn btn-link custom_link"  data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                              Pet Life
+                              <?php echo $Petsrecord['name'];   ?>
                             </button><br>
-                            <button class="btn btn-link custom_link"  data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                              Modern Dog
-                            </button><br>
-                            <button class="btn btn-link custom_link"  data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                              Dog Fancy
-                            </button><br>
-                            </form>
                             
+                            <?php
+                              }
+                            ?>
                           </div>
                         </div>
                       </div>
@@ -153,15 +155,19 @@
                         </div>
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                           <div class="card-body">
+                            <?php
+                              $catname="sports_and_heal";
+                              $Sport_cartegory="SELECT newspaper.name FROM newspaper,category where category.category_id=newspaper.category_id and category.category_name='".$catname."'";
+                              $SportResult=mysqli_query($con,$Sport_cartegory);
+                              while($Sportrecord=mysqli_fetch_assoc($SportResult))
+                                 {
+                            ?>
                             <button class="btn btn-link custom_link"  data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                              Sport Today(SL)
+                              <?php echo $Sportrecord['name'];   ?>
                             </button><br>
-                            <button class="btn btn-link custom_link"  data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                              Top Gear <?php ?>
-                            </button><br>
-                            <button class="btn btn-link custom_link"  data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                              Doctor(SL)
-                            </button><br>
+                            <?php
+                              }
+                            ?>
                           </div>
                         </div>
                       </div>
@@ -169,21 +175,26 @@
                         <div class="card-header" id="headingThree">
                           <h5 class="mb-0">
                             <button class="btn btn-link custom_link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                              Technoloy
+                              Technology
                             </button>
                           </h5>
                         </div>
                         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                           <div class="card-body">
+                            <?php
+                              $catname="technology";
+                              $Tec_cartegory="SELECT newspaper.name FROM newspaper,category where category.category_id=newspaper.category_id and category.category_name='".$catname."'";
+                              $TechResult=mysqli_query($con,$Tec_cartegory);
+                              while($Techrecord=mysqli_fetch_assoc($TechResult))
+                                 {
+                            ?>
                             <button class="btn btn-link custom_link"  data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                              Pariganaka(SL)
+                                <?php echo $Techrecord['name'];   ?>
                             </button><br>
-                            <button class="btn btn-link custom_link"  data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                              Ru(SL)
-                            </button><br>
-                            <button class="btn btn-link custom_link"  data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                              E DEX(SL)
-                            </button><br>
+                            <?php
+                              }
+                            ?>
+                            
                           </div>
                         </div>
                       </div>
