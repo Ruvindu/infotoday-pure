@@ -9,6 +9,31 @@
   if (isset($_POST['publish'])) {
     var_dump($_POST);
     var_dump($_FILES);
+
+    $target_dir = "products/";
+    $file_name = $_FILES['file']['name'];
+    $tmp_file = $_FILES['file']['tmp_name'];
+    $path_for_save = $target_dir.$file_name;
+
+    $fileuploaded = 0;
+
+    $fileuploaded = move_uploaded_file($tmp_file, $path_for_save);
+
+    if ($fileuploaded) {
+      
+         $imgData = addslashes(file_get_contents($_FILES['thumbnail']['tmp_name']));
+
+         $publishQ = "INSERT INTO `newspaper`(`name`, `gross_price`, `supplier_id`, `Publish_duration`, `thumbnail`, `description`, `date`, `category_id`, `file`) VALUES ('{$_POST['newspaper_name']}',{$_POST['gross_price']},{$_SESSION['usr_id']},'{$_POST['duration']}','{$imgData}','{$_POST['description']}','{$_POST['date']}',{$_POST['category']}, '{$path_for_save}')";
+
+
+         if(mysqli_query($con,$publishQ)){
+            echo "<script>alert('File uploaded.')</script>";
+         }
+
+    }
+
+    
+
   }
 
 
@@ -166,7 +191,7 @@
                         <td>
                           <div class="form-group">
                             
-                            <select name="category" class="form-control text_width1" required>
+                            <select name="duration" class="form-control text_width1" required>
                               <option disabled selected>Select duration</option>
                               <option value="Daily" >Daily</option>
                               <option value="Weekly" >Weekly</option>
@@ -194,6 +219,15 @@
                           </div>
                         </td>
                       </tr>
+
+                      <tr>
+                        <td>
+                          <div class="form-group">
+                             <input type="text" name="gross_price" placeholder="Gross Price (RS.)" class="form-control text_width1" required>
+                          </div>
+                        </td>
+                      </tr>
+
 
                       <tr>
                         <td>
