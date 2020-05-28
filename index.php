@@ -236,9 +236,9 @@
                       </div>
                     </div>
 
-
+<!------------------------------------------------- this one ------------------------------------------------------------->
                     <div class="card-deck mt-3">
-                      <?phpif(isset($_POST['AddToPurches']))
+                      <?php if(isset($_POST['AddToPurches']))
                         {
                           $Categories="SELECT * FROM newspaper,category where newspaper.category_id=category.category_id and category.category_name='".$catname."'";
                           $result=mysqli_query($conn,$SQuery);
