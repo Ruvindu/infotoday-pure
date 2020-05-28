@@ -103,7 +103,7 @@
           <div class="row">
             <div class="card-deck ">
              <div class="card text-center " style="width: 700px; background-color: rgba(245, 245, 245, -5);" >
-
+               <h3 class="lead font-weight-bold">You Selected Items</h3>
                <?php
                 $cartQuery="SELECT newspaper.*,user.*,cart.* FROM cart,newspaper,user where cart.user_id=user.user_id and cart.newspaper_id=newspaper.newspaper_id group by cart.cart_id";
                   $CartResult=mysqli_query($con,$cartQuery);
@@ -138,9 +138,11 @@
             </div> 
             <div class="card" style="width: 700px; background-color: rgba(245, 245, 245, -5);">
               <table>
+
                   <tr>
                     <h2>Cart</h2>
                   </tr>
+
                   <tr>
                     <th>Product</th>
                     <th width="10px">&nbsp;</th>
@@ -148,11 +150,12 @@
                   </tr>
                  <?php
                    $total =0;
+                   $user_id=null;
                    $cartQuery="SELECT newspaper.*,user.*,cart.* FROM cart,newspaper,user where cart.user_id=user.user_id and cart.newspaper_id=newspaper.newspaper_id group by cart.cart_id";
                    $CartResult=mysqli_query($con,$cartQuery);
-                   while ($Cartrecord=mysqli_fetch_assoc($CartResult)) {
-                  
-                
+                   while ($Cartrecord=mysqli_fetch_assoc($CartResult)) 
+                   {
+                    $user_id=$Cartrecord['user_id'];
                 ?>
                  <tr>
                  <?php  $total=$total+ $Cartrecord['gross_price'];  ?>
@@ -161,12 +164,36 @@
                     <td>Rs. <?php  echo $Cartrecord['gross_price']; ?></td>
                 </tr>
                 <?php } ?>
+
                 <tr >
                     
                     <td style="font-size: 26px;">
                         Total :Rs. <?php  echo $total; ?>
                     </td>
                 </tr>
+
+                <tr>
+                  <td>
+                    <form  method="POST" action="">
+                      <button class="btn btn-success text-centert " name="AddToPurches">Buy items</button>&nbsp;
+                      <button class="btn btn-warning text-centert " name="DeleteFromCart">Remove all</button>
+                    </form>  
+                  </td>
+                  <?php
+                    if(isset($_POST['AddToPurches']))
+                      {
+                        $InsertToPurches="INSERT INTO purchases (net_ammount,customer_id)VALUES('$total','$user_id')";
+                          mysqli_query($con,$InsertToPurches);
+                      }
+                    if(isset($_POST['DeleteFromCart']))
+                      {
+                        $RemoveAllInCart="TRUNCATE TABLE cart;";
+                          mysqli_query($con,$RemoveAllInCar);
+                      }  
+
+                  ?>
+                </tr>
+
               </table>
             </div>  
           
