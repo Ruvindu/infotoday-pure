@@ -7,8 +7,7 @@
 
 
   if (isset($_POST['publish'])) {
-    var_dump($_POST);
-    var_dump($_FILES);
+
 
     $target_dir = "products/";
     $file_name = $_FILES['file']['name'];
