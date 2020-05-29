@@ -4,7 +4,7 @@
 
   require_once("inc/connection.php");
   session_start();
-
+  
 ?>
 
 
@@ -114,7 +114,7 @@
 
                 <div class="col-md-6">
                     <h3 class="mb-3">Feedback</h3>
-                    <form action="aboutus.php" method="post">
+                    <form action="aboutus.php" method="POST">
                     <table cellpadding="4">
                       <tr>
                         <td>
@@ -128,6 +128,7 @@
                         <td> 
                           <div class="form-group">
                             <input type="text" name="email" placeholder="Email" class="form-control text_width1" required>
+                            <p id="demo" style=" text-align: right; font-weight: bold;"></p>
                           </div>
                         </td>
                        
@@ -155,7 +156,40 @@
 
                     </table>
                   </form>
-                   
+                      <!-------------------------------------SEND TO DB----------------------------------------------------------------------->
+                      <?php
+                        $userid;
+                        if(isset($_POST['send'])){
+                             $username=$_POST['username'];
+                             $message=$_POST['message'];
+                             $email = $_POST['email'];
+                               if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                                    $correct_email=$email;
+                                    echo"<script> document.getElementById('demo').innerHTML = ''; </script>";
+
+                                        if($_SESSION['usr_id']==null){
+                                              $_SESSION['usr_id']=null;
+                                              echo "<script> location.replace('sign.php'); </script>";
+                                  
+                                            }
+
+                                            else{
+                                              $feedback="INSERT INTO feedback (customer_id,description,email)VALUES('".$_SESSION['usr_id']."','$message','$correct_email')";
+                                               mysqli_query($con,$feedback);
+                                            }
+                                      }
+                                    else{
+                                    echo"<script> document.getElementById('demo').innerHTML = 'Please enter valid email'; </script>";
+
+                                      }
+                              
+                            
+
+                        }
+                        
+                      ?>
+
+                      <!----------------------------------------------------------------------------------------------------------------------->
                 </div>
 
                 <div class="col-md-6">
