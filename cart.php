@@ -56,15 +56,6 @@
 
       <?php
 
-         if (isset($_SESSION['role'])){
-
-          if (strcmp($_SESSION['role'], "supplier") == 0) {
-            echo "<li class=\"nav-item\">";
-            echo "<a class=\"nav-link\" href=\"publisher-form.php\">Publish New</a>";
-            echo "</li>";
-          }
-        }  
-
         if (isset($_SESSION['usr_id'])) {
           echo "<li class=\"nav-item\">";
           echo "<a class=\"nav-link\" href=\"signout.php\">Sign out</a>";
@@ -189,7 +180,7 @@
                     </form>  
                   </td>
                   <?php
-                    if(isset($_POST['AddToPurches']))
+                    if(isset($_POST['AddToPurches']) && $total!=0)
                       {
                         $InsertToPurches="INSERT INTO purchases (net_ammount,customer_id)VALUES('$total','$user_id')";
                           mysqli_query($con,$InsertToPurches);
