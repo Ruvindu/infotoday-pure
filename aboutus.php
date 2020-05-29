@@ -177,7 +177,23 @@
                       <td><img src="imgs/instagram.png" width="50px" height="50px"></td>
                       <td><img src="imgs/google.png" width="50px" height="50px"></td>
                     </tr>
-                  </table>
+                  </table><br>
+                  <div class="card" style="background-color: rgba(245, 245, 245, -5); width: 700px;margin-top: 5px;">
+                    <div class="card-body">
+                      <p>
+                        <b>InfoToday</b> will be a General partnership business registered in the state of <b>Wejewardana Mawaththa, Colombo 10, and Sri Lanka</b>. The company will be jointly owned by <b>Mr. Manura Lakshan, Ruvindu Madhushanka, Tharindu Madushanka and Fathima Minha</b>.
+                       </p>
+                       <p>
+                         We are have various kinds of daily newspapers & magazines suppliers who wish to <b>sell in online </b>and Owing to that our company will gain some profit by selling those newspapers and various kinds of magazines. Our facility is a former <b>8,000 square ft. furniture store which allows the company to stock a large amount of inventory</b>.
+                       </p>
+                       <b>Aim</b>
+                       <p>   
+                          Our Aim is selling World populer and local populer magazins ,newspapers for fair price and those knoladge towords to your hand by one click.
+                       </p>
+                     
+                    </div>
+                  </div>
+
                 </div>
 
               
