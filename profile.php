@@ -127,23 +127,53 @@
                 <div class="col-md-4">
                    
                   <div class="card" style="width: 18rem;">
-                      <img class="card-img-top p-2" src="imgs/users/user.png" alt="Card image cap">
+                    <?php
+                      $quary_get_img="SELECT * FROM user WHERE user_id={$_SESSION['usr_id']}";
+                      $ecord=mysqli_fetch_assoc(mysqli_query($con,$quary_get_img));
+                    ?>
+
+                      <img class="card-img-top p-2"   src="data:upload/jpeg;base64,<?php echo base64_encode($ecord['avatar']);?>" alt="Card image cap">
+                      
+                      <div id="abc">
+                        
+                      </div>
                       <div class="card-body">
-                        <a href="#" class="btn btn-primary">Change photo</a>
-                        <a href="#" class="btn btn-danger">Remove</a>
+                        <form method="POST" action="" enctype="multipart/form-data">
+                          <button class="btn btn-primary" id="btReload" name="change_profilepic">Change photo</button>
+                          <a href="#" class="btn btn-danger">Remove</a>
+                          <p style="font-size: 15px;"><br>
+                           Thumbnail :<input type="file" name="fileToUpload" id="fileToUpload" >
+                          </p>
+                        </form>
                       </div>
                     </div>
 
                     <div class="card mt-3" style="width: 18rem;">
                             <div class="card-body">
-                              <h5 class="card-title">Name</h5>
-                              <p class="card-text">
-                                Address :<br>
-                                Phone :<br>
-                                Email :<br>
-                                Joind :<br>
+                              <h5 class="card-title">Personal Details</h5>
+                              <div id="old_details">
+                              <p class="card-text" >
+                                First Name  : <?php echo $ecord['first_name']; ?><br>
+                                Last Name  : <?php echo $ecord['last_name']; ?><br>
+                                Phone : <?php echo $ecord['phone']; ?><br>
+                                Email : <?php echo $ecord['email']; ?><br>
+                                Joined : <?php echo $ecord['join_date']; ?><br>
                               </p>
-                              <a href="#" class="btn btn-primary">Edit privacy</a>
+
+                              <form method="POST" action="">
+                                 <button name="upadate_details" class="btn btn-primary">Edit privacy</button>
+                              </div>   
+                              <div id="new_details">
+                                First Name : <input type="text" placeholder="First Name" name="fname" style=" margin-left: 57px;"><br>
+                                Last Name  : <input type="text" placeholder="Last Name" name="lname" style="margin-left: 57px;"><br><br>
+                                Phone  : <input type="text" placeholder="Phone" name="phone" style=""><br><br>
+                                Email  : <input type="text" placeholder="Email" name="email" style="margin-left: 7px;"><br><br>
+                                Joined  : <input type="text" placeholder="Joined" name="date" style="margin-left: -1px;"><br><br>
+                                <input type="submit" name="add_data"  class="btn btn-primary" value="submit">
+                              </div>
+                              
+                                
+                              </form> 
                             </div>
                     </div>
 
@@ -163,19 +193,6 @@
                                 </div>
                               </form>
                               <a href="#" class="btn btn-primary">Save changes</a>
-                            </div>
-                    </div>
-
-                    <div class="card mt-3" style="width: 18rem;">
-                            <div class="card-body">
-                              <h5 class="card-title">Coupens</h5>
-                                
-                                <div class="card bg-danger text-white">
-                                  <div class="card-body">10% off | coupen ID : 102456</div>
-                                </div>
-                                <br>
-
-                              
                             </div>
                     </div>
 
@@ -201,8 +218,6 @@
                             </div>
                     </div>
 
-                    
-
 
                 </div>
 
@@ -226,3 +241,67 @@
 
 </body>
 </html>
+
+      <?php
+            echo " <script>$('document').ready(function(){
+                      $('#old_details').show();
+                      $('#new_details').hide();
+                      
+                        });";
+                echo "</script>";
+        
+           if(isset($_POST['change_profilepic'])) {
+               if($_FILES['fileToUpload']['tmp_name'] != null){
+                   $imgData = addslashes(file_get_contents($_FILES['fileToUpload']['tmp_name']));
+                   $quary = "UPDATE user SET avatar='$imgData' WHERE user_id={$_SESSION['usr_id']}";
+                    mysqli_query($con,$quary);}     }
+
+            if(isset($_POST['upadate_details'])){
+                echo " <script>$('document').ready(function(){
+                      $('#old_details').hide();
+                      $('#new_details').show();
+                      
+                        });";
+                echo "</script>";
+
+                
+
+            }
+            if(isset($_POST['add_data'])){
+                $fname=$_POST['fname'];
+                $lname=$_POST['lname'];
+                $phone=$_POST['phone'];
+                $email=$_POST['email'];
+                $join_date=$_POST['date'];
+
+
+                $personal_update="UPDATE user SET first_name='$fname' , last_name='$lname' ,phone=' $phone',email='$email',join_date='$join_date' WHERE user_id={$_SESSION['usr_id']}";
+                   mysqli_query($con,$personal_update);
+                 echo " <script>$('document').ready(function(){
+                      $('#old_details').show();
+                      $('#new_details').hide();
+                        });";
+                echo "</script>";
+            }                         
+
+      ?>
+
+
+
+      <script type='text/javascript'>
+
+      (function()
+            {
+          if( window.localStorage )
+                {
+                if( !localStorage.getItem('firstLoad') )
+                     {
+                       localStorage['firstLoad'] = true;
+                        window.location.reload();
+                     }  
+                else
+                    localStorage.removeItem('firstLoad');
+               }
+            })();
+
+      </script>

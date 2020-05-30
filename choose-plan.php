@@ -30,7 +30,7 @@
   		}
   		.package_shaow_table{
   				
-  				border: 1px solid black; 
+  				border: 0px solid black; 
   				height:80px;
   		}
   		
@@ -109,21 +109,21 @@
 
         <div class="container">
         	<div class="row">
-        		<div class="card" style="width: 1000px; height :600px; margin-left: 60px; margin-top: 50px;">
+        		<div class="card" style="width: 1000px; height :500px; margin-left: 60px; margin-top: 50px;">
         			<div class="card-header" style="height: 51px; ">
         				<table>
         					<tr>
         						<form method="POST" action=""><!----------------Gold & lite button control area------------------------------>
         							<td>
-        								<button class="navbar-brand text-center packagebutton" id="gold" name="gold" style="color: gold;">
+        								<button class="navbar-brand text-center packagebutton" id="lite" name="lite" style="color: #0099ff;" >
         								<img src="imgs/logo.png" width="30" height="30" class="d-inline-block align-top" alt="" >
-            							GOLDERN
+            							LITE
             							</button>
         							</td>
         							<td>
-        								<button class="navbar-brand text-center packagebutton" id="lite" name="lite" style="color: #0099ff; margin-left: -15px;">
+        								<button class="navbar-brand text-center packagebutton" id="gold" name="gold" style="color: gold; margin-left: -15px;">
         								<img src="imgs/logo.png" width="30" height="30" class="d-inline-block align-top " alt="">
-            							Lite
+            							GOLDERN
             							</button>
         							</td>
         						</form>
@@ -132,7 +132,7 @@
         			</div>
         			<div class="card-body text-center ">
      <!---------------------------------------------------------Table start--------------------------------------------------------------------->   				
-        				<table style=" margin-top: 10px;">
+        				<table style=" margin-top: 10px; ">
         					<tr  >
         						<td class="package_shaow_table" style="width:500px; border: 0px;">
         							
@@ -141,17 +141,17 @@
         						<td class="package_shaow_table" style="width:200px;line-height: 0pt;border: 0px;">
         							<p> 1 Month</p>
         							<h4>Price</h4>
-        							<button class="btn btn-success">CHOOSE</button>
+        							<button class="btn btn-lite" id="choosebtn" style="color: white;">CHOOSE</button>
         						</td>
         						<td class="package_shaow_table" style="width:200px;line-height: 0pt;border: 0px;">
         							<p> 1 Year</p>
         							<h4>Price</h4>
-        							<button class="btn btn-success">CHOOSE</button>
+        							<button class="btn btn-lite" id="choosebtn1" style="color: white;">CHOOSE</button>
         						</td>
 
         					</tr>
         					<tr>
-        						<td class="package_shaow_table">
+        						<td class="package_shaow_table" id="1">
         							
         						</td>
         						<td class="package_shaow_table">
@@ -181,22 +181,34 @@
 </body>
 </html>
 <?php
+	$x=0;
 	if(isset($_POST['gold'])){
+		$x=1;
 	echo "<script>
 			$(document).ready(function(){
   				
     			$('#lite').css('background-color', '#f7f7f7');
+    			$('#choosebtn').css('background-color', 'gold');
+    			$('#choosebtn1').css('background-color', 'gold');
+  				
   		
-	});
-</script>";
+			});
+
+		</script>
+			
+		<script> document.getElementById('1').innerHTML = 'Please enter valid email'; </script>";
+
 }
-if(isset($_POST['lite'])){
+if(isset($_POST['lite']) || $x==0){
 	echo "<script>
 			$(document).ready(function(){
   				
     			$('#gold').css('background-color', '#f7f7f7');
+    			$('#choosebtn').css('background-color', '#0099ff');
+    			$('#choosebtn1').css('background-color', '#0099ff');
   		
 	});
 </script>";
+
 }
 ?>
