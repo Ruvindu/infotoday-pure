@@ -81,7 +81,7 @@
 			<li class="nav-item">
 				<a class="nav-link" href="cart.php">Cart</a>
 			</li>
-			<li class="nav-item active">
+			<li class="nav-item">
 				<a class="nav-link" href="aboutus.php">About us</a>
 			</li>
 
@@ -90,7 +90,7 @@
         if (isset($_SESSION['role'])){
 
           if (strcmp($_SESSION['role'], "supplier") == 0) {
-            echo "<li class=\"nav-item\">";
+            echo "<li class=\"nav-item active\">";
             echo "<a class=\"nav-link\" href=\"publisher-form.php\">Publish New</a>";
             echo "</li>";
           }
@@ -131,10 +131,7 @@
 
                     ?>
             
-            <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-            </form>
+            
         </div>
         </nav>
 
