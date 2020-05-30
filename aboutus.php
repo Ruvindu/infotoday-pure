@@ -4,7 +4,7 @@
 
   require_once("inc/connection.php");
   session_start();
-
+  
 ?>
 
 
@@ -114,7 +114,7 @@
 
                 <div class="col-md-6">
                     <h3 class="mb-3">Feedback</h3>
-                    <form action="aboutus.php" method="post">
+                    <form action="aboutus.php" method="POST">
                     <table cellpadding="4">
                       <tr>
                         <td>
@@ -128,6 +128,7 @@
                         <td> 
                           <div class="form-group">
                             <input type="text" name="email" placeholder="Email" class="form-control text_width1" required>
+                            <p id="demo" style=" text-align: right; font-weight: bold;"></p>
                           </div>
                         </td>
                        
@@ -155,7 +156,40 @@
 
                     </table>
                   </form>
-                   
+                      <!-------------------------------------SEND TO DB----------------------------------------------------------------------->
+                      <?php
+                        $userid;
+                        if(isset($_POST['send'])){
+                             $username=$_POST['username'];
+                             $message=$_POST['message'];
+                             $email = $_POST['email'];
+                               if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                                    $correct_email=$email;
+                                    echo"<script> document.getElementById('demo').innerHTML = ''; </script>";
+
+                                        if($_SESSION['usr_id']==null){
+                                              $_SESSION['usr_id']=null;
+                                              echo "<script> location.replace('sign.php'); </script>";
+                                  
+                                            }
+
+                                            else{
+                                              $feedback="INSERT INTO feedback (customer_id,description,email)VALUES('".$_SESSION['usr_id']."','$message','$correct_email')";
+                                               mysqli_query($con,$feedback);
+                                            }
+                                      }
+                                    else{
+                                    echo"<script> document.getElementById('demo').innerHTML = 'Please enter valid email'; </script>";
+
+                                      }
+                              
+                            
+
+                        }
+                        
+                      ?>
+
+                      <!----------------------------------------------------------------------------------------------------------------------->
                 </div>
 
                 <div class="col-md-6">
@@ -177,7 +211,23 @@
                       <td><img src="imgs/instagram.png" width="50px" height="50px"></td>
                       <td><img src="imgs/google.png" width="50px" height="50px"></td>
                     </tr>
-                  </table>
+                  </table><br>
+                  <div class="card" style="background-color: rgba(245, 245, 245, -5); width: 700px;margin-top: 5px;">
+                    <div class="card-body">
+                      <p>
+                        <b>InfoToday</b> will be a General partnership business registered in the state of <b>Wejewardana Mawaththa, Colombo 10, and Sri Lanka</b>. The company will be jointly owned by <b>Mr. Manura Lakshan, Ruvindu Madhushanka, Tharindu Madushanka and Fathima Minha</b>.
+                       </p>
+                       <p>
+                         We are have various kinds of daily newspapers & magazines suppliers who wish to <b>sell in online </b>and Owing to that our company will gain some profit by selling those newspapers and various kinds of magazines. Our facility is a former <b>8,000 square ft. furniture store which allows the company to stock a large amount of inventory</b>.
+                       </p>
+                       <b>Aim</b>
+                       <p>   
+                          Our Aim is selling World populer and local populer magazins ,newspapers for fair price and those knoladge towords to your hand by one click.
+                       </p>
+                     
+                    </div>
+                  </div>
+
                 </div>
 
               
