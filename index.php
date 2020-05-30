@@ -226,7 +226,7 @@
                         	
                         ?>
                         <div class="col-lg-3 col-md-5 mb-2" >
-                          <div class="card" style="width: 15rem;">
+                          <div class="card" style="width: 15rem;background-color: rgba(245, 245, 245, -5);">
                             <img class="card-img-top" src="imgs/products/1.jpg" alt="Card image cap">
                             <div class="card-body">
                               <h5 class="card-title">Pariganaka</h5>
