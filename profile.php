@@ -166,6 +166,19 @@
                             </div>
                     </div>
 
+                    <div class="card mt-3" style="width: 18rem;">
+                            <div class="card-body">
+                              <h5 class="card-title">Coupens</h5>
+                                
+                                <div class="card bg-danger text-white">
+                                  <div class="card-body">10% off | coupen ID : 102456</div>
+                                </div>
+                                <br>
+
+                              
+                            </div>
+                    </div>
+
 
                     <div class="card mt-3 mb-3" style="width: 18rem;">
                             <div class="card-body">
@@ -187,6 +200,8 @@
                               
                             </div>
                     </div>
+
+                    
 
 
                 </div>
