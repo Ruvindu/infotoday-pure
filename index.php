@@ -101,9 +101,9 @@
 
                     ?>
             
-            <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+            <form class="form-inline" action="index.php" method="get">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name='search-query'>
+                <input class="btn btn-outline-primary my-2 my-sm-0" type="submit" value="Search" name="search">
             </form>
         </div>
         </nav>
@@ -217,15 +217,10 @@
                     <!--          Items display            -->
                     <div class="card-deck mt-3 ">
                         <?php
-                          //require_once("inc/item-loader.php"); meken db  eken load wenne data
+                          require_once("inc/item-loader.php"); 
                         ?>
-                        <!-- Me tike structure eka hadapan -->
-                        <?php
-                        	for ($i=0; $i <10 ; $i++) { 
-                        		# code...
-                        	
-                        ?>
-                        <div class="col-lg-3 col-md-5 mb-2" >
+                       
+                        <!--div class="col-lg-3 col-md-5 mb-2" >
                           <div class="card" style="width: 15rem;background-color: rgba(245, 245, 245, -5);">
                             <img class="card-img-top" src="imgs/products/1.jpg" alt="Card image cap">
                             <div class="card-body">
@@ -235,14 +230,10 @@
                               <a href="#" class="btn btn-danger">Add to cart</a>
                             </div>
                           </div>
-                        </div>  
-                        <?php
-                    		}
-                        ?>
-                          
-                          
+                        </div-->  
+ 
                     </div>
-                      <!-- Me tike structure eka hadapan -->
+                     
                     
                 </div>
 
