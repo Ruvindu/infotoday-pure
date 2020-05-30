@@ -152,7 +152,7 @@
                                           <dt>";
 
                                             while ($item = mysqli_fetch_assoc($res_cat_items)) {
-                                              echo "<dd><a href='index.php?item={$item['name']}' >{$item['name']} </a></dd>";
+                                              echo "<dd><a href='index.blade.php?item={$item['name']}' >{$item['name']} </a></dd>";
                                             }
                               
                               echo        "</dt>
@@ -215,18 +215,8 @@
                     </div>
 
                     <!--          Items display            -->
-                    <div class="card-deck mt-3 ">
-                        <?php
-                          //require_once("inc/item-loader.php"); meken db  eken load wenne data
-                        ?>
-                        <!-- Me tike structure eka hadapan -->
-                        <?php
-                        	for ($i=0; $i <10 ; $i++) { 
-                        		# code...
-                        	
-                        ?>
-                        <div class="col-lg-3 col-md-5 mb-2" >
-                          <div class="card" style="width: 15rem;background-color: rgba(245, 245, 245, -5);">
+                    <div class="card-deck mt-3">
+                          <div class="card" style="width: 18rem;">
                             <img class="card-img-top" src="imgs/products/1.jpg" alt="Card image cap">
                             <div class="card-body">
                               <h5 class="card-title">Pariganaka</h5>
@@ -235,14 +225,39 @@
                               <a href="#" class="btn btn-danger">Add to cart</a>
                             </div>
                           </div>
-                        </div>  
-                        <?php
-                    		}
-                        ?>
-                          
+
+                          <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="imgs/products/2.jpg" alt="Card image cap">
+                            <div class="card-body">
+                              <h5 class="card-title">Pariganaka</h5>
+                              <p class="card-text">Wijaya pariganaka monthly magazine,<b> February 2016</b></p>
+                              <a href="#" class="btn btn-primary">Preview</a>
+                              <a href="#" class="btn btn-danger">Add to cart</a>
+                            </div>
+                          </div>
+
+                          <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="imgs/products/3.jpg" alt="Card image cap">
+                            <div class="card-body">
+                              <h5 class="card-title">Pariganaka</h5>
+                              <p class="card-text">Wijaya pariganaka monthly magazine,<b> January 20218</b></p>
+                              <a href="#" class="btn btn-primary">Preview</a>
+                              <a href="#" class="btn btn-danger">Add to cart</a>
+                            </div>
+                          </div>
+
+                           <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="imgs/products/3.jpg" alt="Card image cap">
+                            <div class="card-body">
+                              <h5 class="card-title">Pariganaka</h5>
+                              <p class="card-text">Wijaya pariganaka monthly magazine,<b> January 20218</b></p>
+                              <a href="#" class="btn btn-primary">Preview</a>
+                              <a href="#" class="btn btn-danger">Add to cart</a>
+                            </div>
+                          </div>
                           
                     </div>
-                      <!-- Me tike structure eka hadapan -->
+
                     
                 </div>
 
