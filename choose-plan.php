@@ -137,31 +137,48 @@
                 $lite_1year_price='Rs.9000.00';
                 $gold_1month_price='Rs.5100.50';
                 $gold_1year_price='Rs.15000.00';
+                
                 ?>				
         				<table style=" margin-top: 10px; ">
         					<tr  >
         						<td class="package_shaow_table" style="width:500px; border: 0px;">
-        							<h4>Pariganaka</h4>
-                      <p>Wijaya pariganaka monthly magazine</p>
+        							<h4 id="magazin_name"></h4>
+                      <p id="magazin_descript"></p>
         							
         						</td>
-        						<td class="package_shaow_table" style="width:200px;line-height: 0pt;border: 0px;">
+                    <form method="POST" action="">
+        						<td class="package_shaow_table" id="lite_button_month" style="width:200px;line-height: 0pt;border: 0px;">
         							<p> 1 Month</p>
-        							<h4 id="1month">Price</h4>
-        							<button class="btn btn-lite" id="choosebtn" style="color: white;">CHOOSE</button>
+        							<h4 id="1month_lite"></h4>
+        							<button class="btn btn-primary" name="1month_lite"  >CHOOSE</button>
         						</td>
-        						<td class="package_shaow_table" style="width:200px;line-height: 0pt;border: 0px;">
+
+                    <td class="package_shaow_table" id="gold_button_month" style="width:200px;line-height: 0pt;border: 0px;">
+                      <p> 1 Month</p>
+                      <h4 id="1month_gold"></h4>
+                      <button class="btn btn-warning" name="1month_gold">CHOOSE</button>
+                    </td>
+
+        						<td class="package_shaow_table" id="lite_button_year" style="width:200px;line-height: 0pt;border: 0px;">
         							<p> 1 Year</p>
-        							<h4 id="1year">Price</h4>
-        							<button class="btn btn-lite" id="choosebtn1" style="color: white;">CHOOSE</button>
+        							<h4 id="1year_lite"></h4>
+        							<button class="btn btn-primary" name="1year_lite" >CHOOSE</button>
         						</td>
+
+                    <td class="package_shaow_table" id="gold_button_year" style="width:200px;line-height: 0pt;border: 0px;">
+                      <p> 1 Year</p>
+                      <h4 id="1year_gold"></h4>
+                      <button class="btn btn-warning" name="1year_gold" >CHOOSE</button>
+                    </td>
+                    </form>
+
 
         					</tr>
         					<tr>
         						<td class="package_shaow_table lead">
         							 Free 3 coupon available 
         						</td>
-        						<td class="package_shaow_table blockquote">
+        						<td class="package_shaow_table blockquote" id="coupon3">
         							Yes
         						</td>
         						<td class="package_shaow_table blockquote">
@@ -183,8 +200,8 @@
                     <td class="package_shaow_table lead">
                        Shear with 4 members
                     </td>
-                    <td class="package_shaow_table blockquote">
-                      No
+                    <td class="package_shaow_table blockquote" id="shear4">
+                      
                     </td>
                     <td class="package_shaow_table blockquote">
                       Yes
@@ -199,6 +216,8 @@
 </body>
 </html>
 <?php
+
+
 	$x=0;
 	if(isset($_POST['gold'])){
 		$x=1;
@@ -206,32 +225,82 @@
 			$(document).ready(function(){
   				
     			$('#lite').css('background-color', '#f7f7f7');
-    			$('#choosebtn').css('background-color', 'gold');
-    			$('#choosebtn1').css('background-color', 'gold');
+    			
   				
   		
 			});
 
 		</script>
-			
-		<script> document.getElementById('1month').innerHTML =   '$gold_1month_price' </script>
-    <script> document.getElementById('1year').innerHTML =   '$gold_1year_price' </script>
+		<script> document.getElementById('magazin_name').innerHTML =   'Unlimited access to 3000+ magazins , newspapers & wonderful features' </script>
+    <script> document.getElementById('magazin_descript').innerHTML =   '' </script>
+		<script> document.getElementById('1month_gold').innerHTML =   '$gold_1month_price' </script>
+    <script> document.getElementById('1year_gold').innerHTML =   '$gold_1year_price' </script>
+    <script> document.getElementById('shear4').innerHTML =   'Yes' </script>
+    <script> document.getElementById('coupon3').innerHTML =   'Yes' </script>
     ";
+
+    echo " <script>$('document').ready(function(){
+                      $('#lite_button_month').hide();
+                      $('#lite_button_year').hide();
+                      $('#gold_button_year').show();
+                      $('#gold_button_month').show();
+                      
+                        });";
+     echo "</script>";           
 
 }
 if(isset($_POST['lite']) || $x==0){
+  
+  $subs_item_q="SELECT * FROM newspaper WHERE newspaper_id={$_GET['id-subscribe']}" ;
+  $subs_item=mysqli_fetch_assoc(mysqli_query($con,$subs_item_q));
+  $newspaper_name=$subs_item['name'];
+  $newspaper_descript=$subs_item['description'];
+  $newspaper_id=$subs_item['newspaper_id'];                
 	echo "<script>
 			$(document).ready(function(){
   				
     			$('#gold').css('background-color', '#f7f7f7');
-    			$('#choosebtn').css('background-color', '#0099ff');
-    			$('#choosebtn1').css('background-color', '#0099ff');
+    			
   		
 	   });
 
       </script>
-      <script> document.getElementById('1month').innerHTML =   '$lite_1month_price' </script>
-      <script> document.getElementById('1year').innerHTML =   '$lite_1year_price' </script>";
+      <script> document.getElementById('magazin_descript').innerHTML =   '$newspaper_descript' </script>
+      <script> document.getElementById('magazin_name').innerHTML =   '$newspaper_name' </script>
+      <script> document.getElementById('1month_lite').innerHTML =   '$lite_1month_price' </script>
+      <script> document.getElementById('1year_lite').innerHTML =   '$lite_1year_price' </script>
+      <script> document.getElementById('shear4').innerHTML =   'No' </script>
+      <script> document.getElementById('coupon3').innerHTML =   'No' </script>";
+      
+      echo " <script>$('document').ready(function(){
+                      $('#lite_button_month').show();
+                      $('#lite_button_year').show();
+                      $('#gold_button_year').hide();
+                      $('#gold_button_month').hide();
+                      
+                        });";
+     echo "</script>";  
 
 }
+
+$getcoupon="SELECT * FROM coupon";
+$coupon_results=mysqli_fetch_assoc(mysqli_query($con,$getcoupon));
+$coupon_id=$coupon_results['coupon_id'];
+
+if(isset($_POST['1month_lite'])){
+
+  $mydate=getdate(date("U"));
+  $get_current_date="$mydate[month]- $mydate[mday]- $mydate[year]";
+  $date=date_create( $get_current_date);
+  date_add($date,date_interval_create_from_date_string("30 days"));
+  $expired_date= date_format($date,"Y-M-d");
+
+  $subscribe_query="INSERT INTO subscribe (expire_date,duration,customer_id,coupon_id,newspaper_id)VALUES('$expired_date',1,null, $newspaper_id)";
+  mysqli_query($con,$subscribe_query);
+}
+if(isset($_POST['1year_lite'])){}
+if(isset($_POST['1month_gold'])){}
+if(isset($_POST['1year_gold'])){}
+
+
 ?>
