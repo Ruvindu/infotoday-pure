@@ -181,18 +181,20 @@
                     <div class="card mt-3" style="width: 18rem;">
                             <div class="card-body">
                               <h5 class="card-title">Change  password</h5>
-                              <form action="profile.php" method="post">
+                              <form action="profile.php" method="POST">
                                 <div class="form-group">
-                                  <input type="text" class="form-control" id="currentpwd" placeholder="Current password">
+                                  <input type="text" name="current_p" class="form-control" placeholder="Current password">
+                                  <p id="currentpwd" style="font-size: 11px; position: absolute;margin-left: 130px;color: red;"></p>
                                 </div>
                                 <div class="form-group">
-                                  <input type="text" class="form-control" id="newpwd"  placeholder="New password">
+                                  <input type="text" name="new_p" class="form-control" id="newpwd"  placeholder="New password">
                                 </div>
                                 <div class="form-group">
-                                  <input type="text" class="form-control" id="confirmpwd" placeholder="Confirm password">
+                                  <input type="text" name="confirm_p" class="form-control" placeholder="Confirm password">
+                                  <p id="confirmpwd" style="font-size: 11px; position: absolute;margin-left: 130px;color: red;"></p>
                                 </div>
+                                <button name="changepass" class="btn btn-primary">Save changes</button>
                               </form>
-                              <a href="#" class="btn btn-primary">Save changes</a>
                             </div>
                     </div>
 
@@ -243,18 +245,40 @@
 </html>
 
       <?php
-            echo " <script>$('document').ready(function(){
-                      $('#old_details').show();
-                      $('#new_details').hide();
-                      
-                        });";
-                echo "</script>";
+            
         
            if(isset($_POST['change_profilepic'])) {
                if($_FILES['fileToUpload']['tmp_name'] != null){
                    $imgData = addslashes(file_get_contents($_FILES['fileToUpload']['tmp_name']));
                    $quary = "UPDATE user SET avatar='$imgData' WHERE user_id={$_SESSION['usr_id']}";
-                    mysqli_query($con,$quary);}     }
+                    mysqli_query($con,$quary);
+                      }     
+                      echo " <script type='text/javascript'>
+
+                              (function()
+                                        {
+                                  if( window.localStorage )
+                                       {
+                                    if( !localStorage.getItem('firstLoad') )
+                                          {
+                                      localStorage['firstLoad'] = true;
+                                        window.location.reload();
+                                    }  
+                                   else
+                                    localStorage.removeItem('firstLoad');
+                                  }
+                                })();
+
+                              </script>";
+                  }
+
+
+            echo " <script>$('document').ready(function(){
+                      $('#old_details').show();
+                      $('#new_details').hide();
+                      
+                        });";
+                echo "</script>";      
 
             if(isset($_POST['upadate_details'])){
                 echo " <script>$('document').ready(function(){
@@ -282,26 +306,44 @@
                       $('#new_details').hide();
                         });";
                 echo "</script>";
-            }                         
+            }      
+        // ----------------------------------------- Check Current Password ---------------------------------------------------------------//
+            
+        //------------------------------------------- Add New Password ---------------------------------------------------------------//
+            if(isset($_POST['changepass'])){
+
+              $cunntpass="SELECT * FROM user WHERE user_id={$_SESSION['usr_id']}";
+              $cat = mysqli_fetch_assoc(mysqli_query($con,$cunntpass));
+
+              $encripted_current_pass=sha1($_POST['current_p']);
+              $encripted_new_pass=sha1($_POST['confirm_p']);
+             
+                if( $encripted_current_pass == $cat['password']){
+
+                  echo"<script> document.getElementById('currentpwd').innerHTML = ''; </script>";
+
+                  if($_POST['new_p'] == $_POST['confirm_p'] ){
+
+                      $changepass="UPDATE user SET password='$encripted_new_pass' WHERE user_id={$_SESSION['usr_id']}";
+                      mysqli_query($con,$changepass);
+
+                      echo"<script> document.getElementById('confirmpwd').innerHTML = ''; </script>";
+                      echo"<script> alert('Your Password Changed.'); </script>";
+                      
+                  }
+                  else{
+                            
+                        echo"<script> document.getElementById('confirmpwd').innerHTML = 'Re-enter correct Password'; </script>";
+                      }
+                }
+                else{
+                  
+                      echo"<script> document.getElementById('currentpwd').innerHTML = 'Enter Correct Password'; </script>";
+                   }
+            }                  
 
       ?>
 
 
 
-      <script type='text/javascript'>
-
-      (function()
-            {
-          if( window.localStorage )
-                {
-                if( !localStorage.getItem('firstLoad') )
-                     {
-                       localStorage['firstLoad'] = true;
-                        window.location.reload();
-                     }  
-                else
-                    localStorage.removeItem('firstLoad');
-               }
-            })();
-
-      </script>
+     

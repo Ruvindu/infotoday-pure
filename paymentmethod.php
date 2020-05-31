@@ -124,6 +124,7 @@
         			<div class="card card_heandler"><br>
         				<div class="card">
         					<div class="card-body" style="line-height: 23pt;">
+        						<form method="POST" action="">
         						<dd>
         							<div class="bg-secondary credilogo1">
         							<div class="btn-primary credilogo2">
@@ -160,7 +161,7 @@
         						<dt style="margin-top: 20px;">
         							<input type="submit" name="paysubmit" value="Pay Now" class="btn btn-primary form_a" >
         						</dt>
-
+        						</form>
         					</div>
         				</div><br>
         				<div class="card">
@@ -204,6 +205,7 @@
         					<div class="card-body">
         						<?php
         							if(isset($_SESSION['cart_total'])){
+        								$total=$_SESSION['cart_total'];
         								$buy="newpaper buying";
         								echo "<h5>Info-Today ". $buy." </h5>";
         								echo "<h4>You will be charged</h4>";
@@ -211,12 +213,10 @@
         								echo"<dd> You bought Magazins will never be expired</dd>";
         								echo "<dd>Note:You can cancel the auto-renewal at any time during the period.</dd>";
         								echo "<dt>No commitment. Cancel at any time.</dt>	";
-        							
-        						
-        							
         						
 
         							}
+
         						?>
         						
         						
@@ -235,3 +235,9 @@
         </div>
 </body>
 </html>
+<?php
+		if(isset($_POST['paysubmit'])){
+			$InsertToPurches="INSERT INTO purchases (net_ammount,customer_id)VALUES('$total','".$_SESSION['usr_id']."')";
+            mysqli_query($con,$InsertToPurches);
+		}
+?>
