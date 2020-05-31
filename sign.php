@@ -29,7 +29,12 @@
 
 			$_SESSION['role'] = $current_user['role'];
 			
-			header("location:index.php");
+			if ($current_user['role']=="admin") {
+				header("location:admin.php");
+			}else{
+				header("location:index.php");
+			}
+			
 		}else{
 			echo "<script>alert('Incorrect email or password.')</script>";
 		}
