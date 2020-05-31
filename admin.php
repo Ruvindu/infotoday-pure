@@ -89,11 +89,11 @@
         </nav>
 
 
-        <div class="container-fluid m-5">
+        <div class="container">
             
             <div class="row mt-4">
 
-              <div class="col-mt-6">
+              <div class="col-12">
 
                 <h4><font color="#34a5eb">P</font>ending <font color="#34a5eb">N</font>ewspapers</h4><br>
                 <div class="table-wrapper-scroll-y my-custom-scrollbar">
@@ -116,7 +116,7 @@
 
                         <?php 
 
-                            
+                            $get_pendingQ = "SELECT `newspaper`.* , `category`.* , `user`.* FROM `newspaper`, `category` , `user` WHERE `status` = 'pending' AND `newspaper`.`category_id` = `category`.`category_id` AND `newspaper`.`supplier_id` = `user`.`user_id`";
 
                          ?>
                         <tr>

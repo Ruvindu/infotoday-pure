@@ -86,10 +86,10 @@
                       if (isset($_SESSION['usr_id'])) {
                         echo "<a class=\"navbar-brand\" href=\"profile.php\">";
 
-                        if ($_SESSION['usr_avatar']!="") {
-                         echo "<img src=\"{$_SESSION['usr_avatar']}\" width=\"30\" height=\"30\" class=\"d-inline-block align-top\" alt=\"Avatar\">";
+                        if ($_SESSION['usr_avatar']!=NULL) {
+                          echo "<img src=\"data:image/jpeg;base64,{$_SESSION['usr_avatar']}\" width=\"30\" height=\"30\" class=\"d-inline-block align-top profile_border\" >";
                         }else{
-                           echo "<img src=\"imgs/user.png\" width=\"30\" height=\"30\" class=\"d-inline-block align-top\" alt=\"Avatar\">";
+                          echo "<img src=\"imgs/user.png\" width=\"30\" height=\"30\" class=\"d-inline-block align-top\" alt=\"Avatar\">";
                         }
                         
                         echo "{$_SESSION['usr_fname']}";
