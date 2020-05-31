@@ -22,7 +22,11 @@
 
 			$_SESSION['usr_id'] = $current_user['user_id'];
 			$_SESSION['usr_fname'] = $current_user['first_name'];
-			$_SESSION['usr_avatar'] = $current_user['avatar'];
+			
+			if ($current_user['avatar']!=NULL){
+				$_SESSION['usr_avatar'] = base64_encode($current_user['avatar']);
+			}else{$_SESSION['usr_avatar'] = NULL;}
+
 			$_SESSION['role'] = $current_user['role'];
 			
 			header("location:index.php");
@@ -38,16 +42,16 @@
 	}
 
 
-	//sigm up process
+	//sign up process
 
 	if (isset($_POST["signup"])) {
 
 		$today = date("Y-m-d");
 		$encryted_pwd = sha1($_POST['pwd']);
 
-		$reg_new_user_q = "INSERT INTO `user`( `first_name`, `last_name`, `role`, `phone`, `email`, `join_date`, `avatar`, `password` ) VALUES ('{$_POST["fname"]}', '{$_POST["lname"]}', 'customer', '{$_POST["phone"]}', '{$_POST["email"]}', '{$today}', 'imgs\\\\users\\\\user.png' ,'{$encryted_pwd}')";
+		$reg_new_user_q = "INSERT INTO `user`( `first_name`, `last_name`, `role`, `phone`, `email`, `join_date`, `avatar`, `password` ) VALUES ('{$_POST["fname"]}', '{$_POST["lname"]}', 'customer', '{$_POST["phone"]}', '{$_POST["email"]}', '{$today}', NULL ,'{$encryted_pwd}')";
 
-		echo $reg_new_user_q;
+		//echo $reg_new_user_q;
 
 		if (mysqli_query($con,$reg_new_user_q)) {
 
