@@ -6,19 +6,15 @@
   require_once("inc/connection.php");
   session_start();
   
-?>
+	?>
 	<title>Payment Method</title>
-		<meta charset="utf-8">
-  	<meta name="viewport" content="width=device-width, initial-scale=1">
-      
-  	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    
+	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">  
+  	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
-
   	<link rel="stylesheet" type="text/css" href="css/custom.css">
 
   	<style type="text/css">
@@ -206,24 +202,26 @@
         				</div><br>
         				<div class="card " style="height: 300px; width: 400px;">
         					<div class="card-body">
-        						<h5>
-        							Info-Today Golden package
-        						</h5>
-        						<h4>
-        							You will be charged
-        						</h4>
-        						<h4>
-        							Rs.11,500.00
-        						</h4>
-        						<dd>
-        							After 1 Year, we will automatically renew your subscription at Rs11,182.24 on May 29th, 2021.
-        						</dd>
-        						<dd>
-        							Note: You can cancel the auto-renewal at any time during the subscription period.
-        						</dd>
-        						<dt>
-        							No commitment. Cancel at any time.
-        						</dt>
+        						<?php
+        							if(isset($_SESSION['cart_total'])){
+        								$buy="newpaper buying";
+        								echo "<h5>Info-Today ". $buy." </h5>";
+        								echo "<h4>You will be charged</h4>";
+        								echo"<h4 style='color:red;'>Rs.".$_SESSION['cart_total']."</h4>";
+        								echo"<dd> You bought Magazins will never be expired</dd>";
+        								echo "<dd>Note:You can cancel the auto-renewal at any time during the period.</dd>";
+        								echo "<dt>No commitment. Cancel at any time.</dt>	";
+        							
+        						
+        							
+        						
+
+        							}
+        						?>
+        						
+        						
+        						
+        						
         					</div>
         				</div><br>
         				<div class="card" style="height: 100px; width: 400px;">

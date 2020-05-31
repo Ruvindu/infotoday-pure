@@ -188,13 +188,16 @@
                   <?php
                     if(isset($_POST['AddToPurches']))
                       {
-                        $InsertToPurches="INSERT INTO purchases (net_ammount,customer_id)VALUES('$total','$user_id')";
-                          mysqli_query($con,$InsertToPurches);
+                        //$InsertToPurches="INSERT INTO purchases (net_ammount,customer_id)VALUES('$total','$user_id')";
+                          //mysqli_query($con,$InsertToPurches);
+                        $_SESSION['cart_total']=$total;
+                        echo "<script> location.replace('paymentmethod.php'); </script>";
+
                       }
                     if(isset($_POST['DeleteFromCart']))
                       {
                         $RemoveAllInCart="TRUNCATE TABLE cart;";
-                          mysqli_query($con,$RemoveAllInCar);
+                          mysqli_query($con,$RemoveAllInCart);
                       }  
 
                   ?>
@@ -211,3 +214,20 @@
 
 </body>
 </html>
+<script type='text/javascript'>
+
+      (function()
+            {
+          if( window.localStorage )
+                {
+                if( !localStorage.getItem('firstLoad') )
+                     {
+                       localStorage['firstLoad'] = true;
+                        window.location.reload();
+                     }  
+                else
+                    localStorage.removeItem('firstLoad');
+               }
+            })();
+
+      </script>
