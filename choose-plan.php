@@ -131,47 +131,65 @@
         				</table>
         			</div>
         			<div class="card-body text-center ">
-     <!---------------------------------------------------------Table start--------------------------------------------------------------------->   				
+     <!---------------------------------------------------------Table start--------------------------------------------------------------------->   
+                <?php
+                $lite_1month_price='Rs.1100.50';
+                $lite_1year_price='Rs.9000.00';
+                $gold_1month_price='Rs.5100.50';
+                $gold_1year_price='Rs.15000.00';
+                ?>				
         				<table style=" margin-top: 10px; ">
         					<tr  >
         						<td class="package_shaow_table" style="width:500px; border: 0px;">
-        							
+        							<h4>Pariganaka</h4>
+                      <p>Wijaya pariganaka monthly magazine</p>
         							
         						</td>
         						<td class="package_shaow_table" style="width:200px;line-height: 0pt;border: 0px;">
         							<p> 1 Month</p>
-        							<h4>Price</h4>
+        							<h4 id="1month">Price</h4>
         							<button class="btn btn-lite" id="choosebtn" style="color: white;">CHOOSE</button>
         						</td>
         						<td class="package_shaow_table" style="width:200px;line-height: 0pt;border: 0px;">
         							<p> 1 Year</p>
-        							<h4>Price</h4>
+        							<h4 id="1year">Price</h4>
         							<button class="btn btn-lite" id="choosebtn1" style="color: white;">CHOOSE</button>
         						</td>
 
         					</tr>
         					<tr>
-        						<td class="package_shaow_table" id="1">
-        							
+        						<td class="package_shaow_table lead">
+        							 Free 3 coupon available 
         						</td>
-        						<td class="package_shaow_table">
-        							
+        						<td class="package_shaow_table blockquote">
+        							Yes
         						</td>
-        						<td class="package_shaow_table">
-        							
+        						<td class="package_shaow_table blockquote">
+        							Yes
         						</td>
         					</tr>
         					<tr>
-        						<td class="package_shaow_table">
-        							
+        						<td class="package_shaow_table lead">
+        							 Cancle subscription Any time
         						</td>
-        						<td class="package_shaow_table">
-        							
+        						<td class="package_shaow_table blockquote">
+        							Yes
         						</td>
-        						<td class="package_shaow_table">
-        							
+        						<td class="package_shaow_table blockquote">
+        							Yes
         						</td>
         					</tr>
+                  <tr>
+                    <td class="package_shaow_table lead">
+                       Shear with 4 members
+                    </td>
+                    <td class="package_shaow_table blockquote">
+                      No
+                    </td>
+                    <td class="package_shaow_table blockquote">
+                      Yes
+                    </td>
+                  </tr>
         				</table>
  <!------------------------------------------------Table end--------------------------------------------------------------------------------->       				
         			</div>
@@ -196,7 +214,9 @@
 
 		</script>
 			
-		<script> document.getElementById('1').innerHTML = 'Please enter valid email'; </script>";
+		<script> document.getElementById('1month').innerHTML =   '$gold_1month_price' </script>
+    <script> document.getElementById('1year').innerHTML =   '$gold_1year_price' </script>
+    ";
 
 }
 if(isset($_POST['lite']) || $x==0){
@@ -207,8 +227,11 @@ if(isset($_POST['lite']) || $x==0){
     			$('#choosebtn').css('background-color', '#0099ff');
     			$('#choosebtn1').css('background-color', '#0099ff');
   		
-	});
-</script>";
+	   });
+
+      </script>
+      <script> document.getElementById('1month').innerHTML =   '$lite_1month_price' </script>
+      <script> document.getElementById('1year').innerHTML =   '$lite_1year_price' </script>";
 
 }
 ?>
