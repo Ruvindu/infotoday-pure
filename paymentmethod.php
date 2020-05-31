@@ -195,7 +195,7 @@
         							<tr>
         								
         								<th class="text-center"><br>
-        									Check Your Vouchors&emsp;&emsp; <input type="submit" name="vouchorsubmit" value="+" style="margin-right: -70px;background-color:  white;border: none;">
+        									Check your coupon&emsp;&emsp; <input type="submit" name="vouchorsubmit" value="+" style="margin-right: -70px;background-color:  white;border: none;">
         								</th>
         							</tr>
 
