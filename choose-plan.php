@@ -86,12 +86,11 @@
                       if (isset($_SESSION['usr_id'])) {
                         echo "<a class=\"navbar-brand\" href=\"profile.php\">";
 
-                         if ($_SESSION['usr_avatar']!=NULL) {
-                          echo "<img src=\"data:image/jpeg;base64,{$_SESSION['usr_avatar']}\" width=\"30\" height=\"30\" class=\"d-inline-block align-top profile_border\" >";
+                        if ($_SESSION['usr_avatar']!="") {
+                         echo "<img src=\"{$_SESSION['usr_avatar']}\" width=\"30\" height=\"30\" class=\"d-inline-block align-top\" alt=\"Avatar\">";
                         }else{
-                          echo "<img src=\"imgs/user.png\" width=\"30\" height=\"30\" class=\"d-inline-block align-top\" alt=\"Avatar\">";
+                           echo "<img src=\"imgs/user.png\" width=\"30\" height=\"30\" class=\"d-inline-block align-top\" alt=\"Avatar\">";
                         }
-                        
                         
                         echo "{$_SESSION['usr_fname']}";
                         echo "</a>";
@@ -256,7 +255,7 @@ if(isset($_POST['lite']) || $x==0){
   $subs_item=mysqli_fetch_assoc(mysqli_query($con,$subs_item_q));
   $newspaper_name=$subs_item['name'];
   $newspaper_descript=$subs_item['description'];
-  $newspaper_id=$subs_item['newspaper_id'];                
+  $_SESSION['subs_newspaper_id']=$subs_item['newspaper_id'];                
 	echo "<script>
 			$(document).ready(function(){
   				
@@ -284,24 +283,74 @@ if(isset($_POST['lite']) || $x==0){
 
 }
 
+
+
+
+
 $getcoupon="SELECT * FROM coupon";
 $coupon_results=mysqli_fetch_assoc(mysqli_query($con,$getcoupon));
 $coupon_id=$coupon_results['coupon_id'];
+$user_id=$_SESSION['usr_id'];
 
 if(isset($_POST['1month_lite'])){
 
   $mydate=getdate(date("U"));
-  $get_current_date="$mydate[month]- $mydate[mday]- $mydate[year]";
-  $date=date_create( $get_current_date);
+  $date=date_create( $mydate['month']- $mydate['mday']- $mydate['year']);
   date_add($date,date_interval_create_from_date_string("30 days"));
   $expired_date= date_format($date,"Y-M-d");
 
-  $subscribe_query="INSERT INTO subscribe (expire_date,duration,customer_id,coupon_id,newspaper_id)VALUES('$expired_date',1,null, $newspaper_id)";
-  mysqli_query($con,$subscribe_query);
+  $_SESSION['newspaper_name']=$newspaper_name;
+  $_SESSION['duration']='1 Month';
+  $_SESSION['amount']=$lite_1month_price;
+  $_SESSION['expire']=$expired_date;
+  $_SESSION['coupon_id']=null;
+  echo "<script> location.replace('paymentmethod.php'); </script>";
+  
 }
-if(isset($_POST['1year_lite'])){}
-if(isset($_POST['1month_gold'])){}
-if(isset($_POST['1year_gold'])){}
+if(isset($_POST['1year_lite'])){
+
+  $mydate=getdate(date("U"));
+  $date=date_create($mydate['month']- $mydate['mday']- $mydate['year']);
+  date_add($date,date_interval_create_from_date_string("1 year"));
+  $expired_date= date_format($date,"Y-M-d");
+
+  $_SESSION['newspaper_name']=$newspaper_name;
+  $_SESSION['duration']='1 Year';
+  $_SESSION['amount']=$lite_1year_price;
+  $_SESSION['expire']=$expired_date;
+  $_SESSION['coupon_id']=$coupon_id;
+  echo "<script> location.replace('paymentmethod.php'); </script>";
+  
+}
+if(isset($_POST['1month_gold'])){
+
+  $mydate=getdate(date("U"));
+  $date=date_create( $mydate['month']- $mydate['mday']- $mydate['year']);
+  date_add($date,date_interval_create_from_date_string("30 days"));
+  $expired_date= date_format($date,"Y-M-d");
+
+  $_SESSION['newspaper_name']=null;
+   $_SESSION['duration']='1 Month';
+  $_SESSION['amount']=$gold_1month_price;
+  $_SESSION['expire']=$expired_date;
+  $_SESSION['coupon_id']=$coupon_id;
+  echo "<script> location.replace('paymentmethod.php'); </script>";
+ 
+}
+if(isset($_POST['1year_gold'])){
+
+  $mydate=getdate(date("U"));
+  $date=date_create($mydate['month']- $mydate['mday']- $mydate['year']);
+  date_add($date,date_interval_create_from_date_string("1 year"));
+  $expired_date= date_format($date,"Y-M-d");
+
+  $_SESSION['newspaper_name']=null;
+   $_SESSION['duration']='1 Year';
+  $_SESSION['amount']=$gold_1year_price;
+  $_SESSION['expire']=$expired_date;
+  $_SESSION['coupon_id']=$coupon_id;
+   echo "<script> location.replace('paymentmethod.php'); </script>";
+}
 
 
 ?>

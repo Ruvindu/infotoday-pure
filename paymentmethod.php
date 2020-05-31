@@ -205,7 +205,30 @@
         				<div class="card " style="height: 300px; width: 400px;">
         					<div class="card-body">
         						<?php
+
+                    if(isset($_POST['paysubmit'])){
+
+                       
+                       $expir=$_SESSION['expire'];
+                       $user_id=$_SESSION['usr_id'];
+                       $coupon_id=$_SESSION['coupon_id'];
+                       $newspaper_id=$_SESSION['subs_newspaper_id'];
+                       $subcript_type=$_SESSION['subcript_type'];
+
+                       $subscribe_query="INSERT INTO subscribe (expire_date,customer_id,coupon_id,newspaper_id,package)VALUES('$expir','$user_id','$coupon_id', '$newspaper_id','$subcript_type')";
+                         mysqli_query($con,$subscribe_query);
+                       
+                       $RemoveAllInCart="TRUNCATE TABLE cart;";
+                        mysqli_query($con,$RemoveAllInCart);
+                        unset($_SESSION['cart_total']) ;
+                       unset($_SESSION['amount']);
+
+                       echo "<script> location.replace('index.php'); </script>";
+                    }
+
+
         							if(isset($_SESSION['cart_total'])){
+
         								$total=$_SESSION['cart_total'];
         								$buy="newpaper buying";
         								echo "<h5>Info-Today ". $buy." </h5>";
@@ -214,9 +237,26 @@
         								echo"<dd> You bought Magazins will never be expired</dd>";
         								echo "<dd>Note:You can cancel the auto-renewal at any time during the period.</dd>";
         								echo "<dt>No commitment. Cancel at any time.</dt>	";
-        						
-
         							}
+
+                      if(isset($_SESSION['amount'])){
+                        $total=$_SESSION['amount'];
+                        $buy="newpaper buying";
+
+                        if($_SESSION['newspaper_name']==null){
+                          $_SESSION['subcript_type'] ='Gold';
+                        }else{
+                          $_SESSION['subcript_type']='Lite';
+                        }
+                        echo "<h5>Info-Today ". $_SESSION['subcript_type']." ".$_SESSION['duration']." Subscription </h5>";
+                        echo "<h4>You will be charged</h4>";
+                        echo"<h4 style='color:red;'>Rs.".$_SESSION['amount']."</h4>";
+                        echo"<dd> After ".$_SESSION['duration']." , we will automatically renew your Subscription at ".$_SESSION['amount']." on ".$_SESSION['expire'].".</dd>";
+                        echo "<dd>Note:You can cancel the auto-renewal at any time during the period.</dd>";
+                        echo "<dt>No commitment. Cancel at any time.</dt> ";
+                      }
+                      
+
 
         						?>
         						
@@ -237,8 +277,5 @@
 </body>
 </html>
 <?php
-		if(isset($_POST['paysubmit'])){
-			$InsertToPurches="INSERT INTO purchases (net_ammount,customer_id)VALUES('$total','".$_SESSION['usr_id']."')";
-            mysqli_query($con,$InsertToPurches);
-		}
+		
 ?>
