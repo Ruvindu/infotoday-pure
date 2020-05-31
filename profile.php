@@ -141,7 +141,7 @@
                       <div class="card-body">
                         <form method="POST" action="" enctype="multipart/form-data">
                           <button class="btn btn-primary" id="btReload" name="change_profilepic">Change photo</button>
-                          <a href="#" class="btn btn-danger">Remove</a>
+                          <button class="btn btn-danger" id="btRemove" name="remove_profile">Remove</button>
                           <p style="font-size: 15px;"><br>
                            Thumbnail :<input type="file" name="fileToUpload" id="fileToUpload" >
                           </p>
@@ -246,6 +246,13 @@
 </html>
 
       <?php
+
+          if (isset($_POST['remove_profile'])) {
+            $removeQ = "UPDATE user SET avatar=NULL WHERE user_id={$_SESSION['usr_id']}";
+            mysqli_query($con,$removeQ);
+            
+            $_SESSION['usr_avatar'] = NULL;
+          }
             
         
            if(isset($_POST['change_profilepic'])) {
@@ -253,7 +260,8 @@
                    $imgData = addslashes(file_get_contents($_FILES['fileToUpload']['tmp_name']));
                    $quary = "UPDATE user SET avatar='$imgData' WHERE user_id={$_SESSION['usr_id']}";
                     mysqli_query($con,$quary);
-                      }     
+
+                    }     
                       echo " <script type='text/javascript'>
 
                               (function()
