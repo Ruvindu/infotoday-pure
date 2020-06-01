@@ -137,27 +137,27 @@
         							Card Number
         						</dt>
         						<dd>
-        							<input type="text" name="creaditcard" placeholder="Card Number" class="form_a">
+        							<input type="text" name="creaditcard" placeholder="Card Number" class="form_a" required>
         						</dd>
         						<dt>
         							Expiry &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&emsp;
         							CVV
         						</dt>
         						<dd>
-        							<input type="text" name="cardexpire" placeholder="MM/YY">&emsp;
-        							<input type="text" name="cardcvv" placeholder="CVV" style="width: 100px;"> <dd class="cvvtext" >Last 3 or 4 digits<br> on back of card</dd> 
+        							<input type="text" name="cardexpire" placeholder="MM/YY" required>&emsp;
+        							<input type="text" name="cardcvv" placeholder="CVV" style="width: 100px;" required> <dd class="cvvtext" >Last 3 or 4 digits<br> on back of card</dd> 
         						</dd>
         						<dt>
         							Name on Card
         						</dt>
         						<dd>
-        							<input type="text" name="cardname" placeholder="Name on Card" class="form_a">
+        							<input type="text" name="cardname" placeholder="Name on Card" class="form_a" required>
         						</dd>
         						<dt>
         							Email ID
         						</dt>
         						<dd>
-        							<input type="text" name="emailid" placeholder="Email ID" class="form_a">
+        							<input type="text" name="emailid" placeholder="Email ID" class="form_a" required>
         						</dd>
         						<dt style="margin-top: 20px;">
         							<input type="submit" name="paysubmit" value="Pay Now" class="btn btn-primary form_a" >
@@ -166,7 +166,13 @@
         					</div>
         				</div><br>
         				<div class="card">
-        					<div class="card-body">
+        					<div class="card-body" id="subscribe_error">
+                    <h3 style="color: red;" id="error_head"></h3>
+                    <p class="lead" id="error_body"></p>
+                    <p id="error_link" ></p>
+                    <form method="POST" action="">
+                      <input type="submit" name="end_subscribe" class="btn btn-lite lead" style="color:blue;" value="End current subscription !">  
+                    </form>
         						
         					</div>
         				</div><br>
@@ -185,12 +191,14 @@
         								</dd>
         							</tr>
         							<tr>
+                        <form method="POST" action="">
         								<td>
         									<input type="text" name="couponcode" placeholder="Coupon Code" style="margin-left: 50px; margin-top: 10px;width: 200px;">
         								</td>
         								<td>
         									<input type="submit" name="couponsubmit" value="Apply" class="btn btn-primary" style="margin-top: 10px; width: 90px;margin-left: 3px;">
         								</td>
+                        </form>
         							</tr>
         							<tr>
         								
@@ -206,25 +214,7 @@
         					<div class="card-body">
         						<?php
 
-                    if(isset($_POST['paysubmit'])){
-
-                       
-                       $expir=$_SESSION['expire'];
-                       $user_id=$_SESSION['usr_id'];
-                       $coupon_id=$_SESSION['coupon_id'];
-                       $newspaper_id=$_SESSION['subs_newspaper_id'];
-                       $subcript_type=$_SESSION['subcript_type'];
-
-                       $subscribe_query="INSERT INTO subscribe (expire_date,customer_id,coupon_id,newspaper_id,package)VALUES('$expir','$user_id','$coupon_id', '$newspaper_id','$subcript_type')";
-                         mysqli_query($con,$subscribe_query);
-                       
-                       $RemoveAllInCart="TRUNCATE TABLE cart;";
-                        mysqli_query($con,$RemoveAllInCart);
-                        unset($_SESSION['cart_total']) ;
-                       unset($_SESSION['amount']);
-
-                       echo "<script> location.replace('index.php'); </script>";
-                    }
+                    
 
 
         							if(isset($_SESSION['cart_total'])){
@@ -233,13 +223,16 @@
         								$buy="newpaper buying";
         								echo "<h5>Info-Today ". $buy." </h5>";
         								echo "<h4>You will be charged</h4>";
-        								echo"<h4 style='color:red;'>Rs.".$_SESSION['cart_total']."</h4>";
+        								echo"<h4 style='color:red;'>".$_SESSION['cart_total']."</h4>";
         								echo"<dd> You bought Magazins will never be expired</dd>";
         								echo "<dd>Note:You can cancel the auto-renewal at any time during the period.</dd>";
         								echo "<dt>No commitment. Cancel at any time.</dt>	";
         							}
 
+
+
                       if(isset($_SESSION['amount'])){
+                        $expir=$_SESSION['expire'];
                         $total=$_SESSION['amount'];
                         $buy="newpaper buying";
 
@@ -250,7 +243,7 @@
                         }
                         echo "<h5>Info-Today ". $_SESSION['subcript_type']." ".$_SESSION['duration']." Subscription </h5>";
                         echo "<h4>You will be charged</h4>";
-                        echo"<h4 style='color:red;'>Rs.".$_SESSION['amount']."</h4>";
+                        echo"<h4 style='color:red;'>".$_SESSION['amount']."</h4>";
                         echo"<dd> After ".$_SESSION['duration']." , we will automatically renew your Subscription at ".$_SESSION['amount']." on ".$_SESSION['expire'].".</dd>";
                         echo "<dd>Note:You can cancel the auto-renewal at any time during the period.</dd>";
                         echo "<dt>No commitment. Cancel at any time.</dt> ";
@@ -277,5 +270,93 @@
 </body>
 </html>
 <?php
-		
+  echo "<script>
+        $('document').ready(function(){
+        $('#end_sbus_hide').hide();
+                                });
+        </script>";
+                             
+        $chech_to_subscribe="SELECT * FROM subscribe WHERE user_id={$_SESSION['usr_id']}";
+            $apply_subscribe_results=mysqli_fetch_assoc(mysqli_query($con,$chech_to_subscribe));
+		          if(isset($_POST['paysubmit'])){
+
+                       if(isset($_SESSION['amount'])){
+
+                          if($apply_subscribe_results['user_id']==null){
+
+                            $expir=$_SESSION['expire'];
+                            $user_id=$_SESSION['usr_id'];
+                            $coupon_id=$_SESSION['coupon_id'];
+                            $newspaper_id=$_SESSION['subs_newspaper_id'];
+                            $subcript_type=$_SESSION['subcript_type'];
+
+                            $subscribe_query="INSERT INTO subscribe (expire_date,customer_id,coupon_id,newspaper_id,package)VALUES('$expir','$user_id','$coupon_id', '$newspaper_id','$subcript_type')";
+                            mysqli_query($con,$subscribe_query);
+                          }
+                          else{
+                            echo"<script> document.getElementById('error_head').innerHTML = 'subscribe error'; </script>";
+                            echo"<script> document.getElementById('error_body').innerHTML = 'You already applied a package.<br>If you want apply another package please confirm deactivate current package'; </script>";
+                            echo"<script> document.getElementById('error_head').innerHTML = 'subscribe error'; </script>";
+                            echo"<script> document.getElementById('error_link').innerHTML = 'Click the link for'; </script>"; 
+                            echo "<script> location.replace('#subscribe_error'); </script>";
+                            
+                            echo "<script>
+                                $('document').ready(function(){
+                                $('#end_sbus_hide').show();
+                                 });
+                                    </script>";
+                          }
+                       }
+                          
+
+                     
+
+                       if(isset($_SESSION['cart_total'])){
+
+                          
+                      
+                            $but_query="INSERT INTO buy  SELECT * FROM cart WHERE user_id={$_SESSION['usr_id']}";
+                            mysqli_query($con,$but_query);
+
+                            
+                          }
+
+                          
+                        
+                      $RemoveAllInCart="TRUNCATE TABLE cart;";
+                      mysqli_query($con,$RemoveAllInCart);
+                      unset($_SESSION['cart_total']) ;
+                      unset($_SESSION['amount']);
+
+                      echo "<script> location.replace('index.php'); </script>";
+                    }
+
+    if(isset($_POST['couponsubmit'])){
+            $chech_to_apply_coupon="SELECT * FROM subscribe WHERE user_id={$_SESSION['usr_id']}";       
+            $apply_coupon_results=mysqli_fetch_assoc(mysqli_query($con,$chech_to_apply_coupon));
+
+            if( $apply_coupon_results['coupon_id']>0){
+
+
+            }
+
+
+    }
+
+    if(isset($_POST['end_subscribe'])){
+                            
+                            $delete_subscribe="DELETE FROM subscribe where user_id={$_SESSION['usr_id']}";
+                            mysqli_query($con,$delete_subscribe);
+                            echo"<script> document.getElementById('error_head').innerHTML = ''; </script>";
+                            echo"<script> document.getElementById('error_body').innerHTML = ''; </script>";
+                            echo"<script> document.getElementById('error_head').innerHTML = ''; </script>";
+                            echo"<script> document.getElementById('error_link').innerHTML = ''; </script>"; 
+                            
+                            echo "<script>
+                                $('document').ready(function(){
+                                $('#end_sbus_hide').hide();
+                                 });
+                                    </script>";
+                          }
+
 ?>

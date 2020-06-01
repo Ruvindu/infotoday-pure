@@ -319,6 +319,7 @@ if(isset($_POST['1year_lite'])){
   $_SESSION['amount']=$lite_1year_price;
   $_SESSION['expire']=$expired_date;
   $_SESSION['coupon_id']=$coupon_id;
+
   echo "<script> location.replace('paymentmethod.php'); </script>";
   
 }
