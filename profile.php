@@ -202,7 +202,28 @@
 
                     <div class="card mt-3 mb-3" style="width: 18rem;">
                             <div class="card-body">
-                              <h5 class="card-title">Change account type</h5>
+                              <h5 class="card-title" >Change account type</h5>
+
+                              <?php
+                             
+                                if ( strcmp($_SESSION['role'], "supplier") == 0) {
+                                  echo "You are already Publisher. Publisher account can't change to customer account.";
+                                }else{
+                                  
+                                  echo "
+                                      <p class=\"card-text\">
+                                      Change your customer account as a <a href=\"profile.php?user={$_SESSION['usr_id']}\" ; >publisher</a>.
+                                      </p>
+                                  ";
+                                }
+                              ?>
+                              
+                            </div>
+                    </div>
+
+                    <div class="card mt-3 mb-3" style="width: 18rem;" name="couponfind">
+                            <div class="card-body">
+                              <h5 class="card-title" >Change account type</h5>
 
                               <?php
                              

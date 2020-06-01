@@ -304,6 +304,7 @@ if(isset($_POST['1month_lite'])){
   $_SESSION['amount']=$lite_1month_price;
   $_SESSION['expire']=$expired_date;
   $_SESSION['coupon_id']=null;
+  unset($_SESSION['cart_total']);
   echo "<script> location.replace('paymentmethod.php'); </script>";
   
 }
@@ -319,6 +320,7 @@ if(isset($_POST['1year_lite'])){
   $_SESSION['amount']=$lite_1year_price;
   $_SESSION['expire']=$expired_date;
   $_SESSION['coupon_id']=$coupon_id;
+   unset($_SESSION['cart_total']);
 
   echo "<script> location.replace('paymentmethod.php'); </script>";
   
@@ -335,6 +337,8 @@ if(isset($_POST['1month_gold'])){
   $_SESSION['amount']=$gold_1month_price;
   $_SESSION['expire']=$expired_date;
   $_SESSION['coupon_id']=$coupon_id;
+   unset($_SESSION['cart_total']);
+
   echo "<script> location.replace('paymentmethod.php'); </script>";
  
 }
@@ -350,6 +354,8 @@ if(isset($_POST['1year_gold'])){
   $_SESSION['amount']=$gold_1year_price;
   $_SESSION['expire']=$expired_date;
   $_SESSION['coupon_id']=$coupon_id;
+   unset($_SESSION['cart_total']);
+  
    echo "<script> location.replace('paymentmethod.php'); </script>";
 }
 

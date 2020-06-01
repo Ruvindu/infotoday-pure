@@ -171,7 +171,7 @@
                     <p class="lead" id="error_body"></p>
                     <p id="error_link" ></p>
                     <form method="POST" action="">
-                      <input type="submit" name="end_subscribe" class="btn btn-lite lead" style="color:blue;" value="End current subscription !">  
+                      <input type="submit" name="end_subscribe" id="end_sbus_hide" class="btn btn-lite lead" style="color:blue;" value="End current subscription !">  
                     </form>
         						
         					</div>
@@ -190,32 +190,34 @@
         									</div>
         								</dd>
         							</tr>
+                      <form method="POST" action="">
         							<tr>
-                        <form method="POST" action="">
+                        
         								<td>
-        									<input type="text" name="couponcode" placeholder="Coupon Code" style="margin-left: 50px; margin-top: 10px;width: 200px;">
+        									<input type="text"  name="coupon_code_get" placeholder="Coupon Code" style="margin-left: 50px; margin-top: 10px;width: 200px;">
         								</td>
         								<td>
         									<input type="submit" name="couponsubmit" value="Apply" class="btn btn-primary" style="margin-top: 10px; width: 90px;margin-left: 3px;">
         								</td>
-                        </form>
+                        
         							</tr>
         							<tr>
         								
         								<th class="text-center"><br>
-        									Check your coupon&emsp;&emsp; <input type="submit" name="vouchorsubmit" value="+" style="margin-right: -70px;background-color:  white;border: none;">
+        									Check your coupon&emsp;&emsp; <button style="margin-right: -70px;background-color:  white;border: none;"><a couponfind>+</a></button> 
         								</th>
         							</tr>
-
+                      </form>
         						</table>
         					</div>
         				</div><br>
         				<div class="card " style="height: 300px; width: 400px;">
         					<div class="card-body">
+  <!------------------------------------------------------------------------------Choose items code---(one time shows only one)------------------------------------------>
         						<?php
 
                     
-
+ 
 
         							if(isset($_SESSION['cart_total'])){
 
@@ -223,11 +225,13 @@
         								$buy="newpaper buying";
         								echo "<h5>Info-Today ". $buy." </h5>";
         								echo "<h4>You will be charged</h4>";
-        								echo"<h4 style='color:red;'>".$_SESSION['cart_total']."</h4>";
+        								echo"<h4 style='color:red;'>Rs.".$_SESSION['cart_total']."</h4>";
         								echo"<dd> You bought Magazins will never be expired</dd>";
         								echo "<dd>Note:You can cancel the auto-renewal at any time during the period.</dd>";
         								echo "<dt>No commitment. Cancel at any time.</dt>	";
+                       
         							}
+                     
 
 
 
@@ -247,6 +251,7 @@
                         echo"<dd> After ".$_SESSION['duration']." , we will automatically renew your Subscription at ".$_SESSION['amount']." on ".$_SESSION['expire'].".</dd>";
                         echo "<dd>Note:You can cancel the auto-renewal at any time during the period.</dd>";
                         echo "<dt>No commitment. Cancel at any time.</dt> ";
+                       
                       }
                       
 
@@ -270,6 +275,8 @@
 </body>
 </html>
 <?php
+
+//-----------------------------------------------------------------------payment code and page controll-------------------------------------------------------------------//
    echo "<script>
         $('document').ready(function(){
         $('#end_sbus_hide').hide();
@@ -277,12 +284,12 @@
         </script>";
                              
         $chech_to_subscribe="SELECT * FROM subscribe WHERE customer_id={$_SESSION['usr_id']}";
-            $apply_subscribe_results=mysqli_fetch_assoc(mysqli_query($con,$chech_to_subscribe));
+        $apply_subscribe_results=mysqli_fetch_assoc(mysqli_query($con,$chech_to_subscribe));
 		          if(isset($_POST['paysubmit'])){
 
                        if(isset($_SESSION['amount'])){
 
-                          if($apply_subscribe_results['user_id']==null){
+                          if($apply_subscribe_results == null){
 
                             $expir=$_SESSION['expire'];
                             $user_id=$_SESSION['usr_id'];
@@ -292,6 +299,7 @@
 
                             $subscribe_query="INSERT INTO subscribe (expire_date,customer_id,coupon_id,newspaper_id,package)VALUES('$expir','$user_id','$coupon_id', '$newspaper_id','$subcript_type')";
                             mysqli_query($con,$subscribe_query);
+                            echo "<script> location.replace('index.php'); </script>";
                           }
                           else{
                             echo"<script> document.getElementById('error_head').innerHTML = 'subscribe error'; </script>";
@@ -318,7 +326,7 @@
                             $but_query="INSERT INTO buy  SELECT * FROM cart WHERE user_id={$_SESSION['usr_id']}";
                             mysqli_query($con,$but_query);
 
-                            
+                            echo "<script> location.replace('index.php'); </script>";
                           }
 
                           
@@ -328,35 +336,64 @@
                       unset($_SESSION['cart_total']) ;
                       unset($_SESSION['amount']);
 
-                      echo "<script> location.replace('index.php'); </script>";
+                      
                     }
 
+   //------------------------------------------------------------------------Coupon code--------------------------------------------------------//                 
     if(isset($_POST['couponsubmit'])){
-            $chech_to_apply_coupon="SELECT * FROM subscribe WHERE user_id={$_SESSION['usr_id']}";       
+
+            $chech_to_apply_coupon="SELECT * FROM subscribe WHERE customer_id={$_SESSION['usr_id']}";       
             $apply_coupon_results=mysqli_fetch_assoc(mysqli_query($con,$chech_to_apply_coupon));
 
-            if( $apply_coupon_results['coupon_id']>0){
+            $get_coupon="SELECT * FROM coupon WHERE coupon_id={$apply_coupon_results['coupon_id']}";       
+            $get_coupon_results=mysqli_fetch_assoc(mysqli_query($con, $get_coupon));
+
+            if( $apply_coupon_results['coupon_id'] >0){
+                if( $get_coupon_results['coupon_code'] == $_POST['coupon_code_get'] ){
+                  $_SESSION['cart_total']=$_SESSION['cart_total']-$get_coupon_results['coupon_discount'];
+                  echo $_SESSION['cart_total'];
+    //-----------------------------------------------------------------------Update coupon detail-----------------------------------------------//
+                  $update_coupon_details="UPDATE subscribe SET coupon_id='0' WHERE customer_id={$_SESSION['usr_id']} ";
+                  mysqli_query($con,$update_coupon_details);
+  //-------------------------------------------------------------------------Refresh code----------------------------------------------------//
+                  echo " <script type='text/javascript'>
 
 
+                              (function()
+                                        {
+                                  if( window.localStorage )
+                                       {
+                                    if( !localStorage.getItem('firstLoad') )
+                                          {
+                                      localStorage['firstLoad'] = true;
+                                        window.location.reload();
+                                    }  
+                                   else
+                                    localStorage.removeItem('firstLoad');
+                                  }
+                                })();
+
+                              </script>";
             }
-
+          }
 
     }
 
+    //--------------------------------------------------------------------------Delete Subscribed package--------------------------------------------------//
+
     if(isset($_POST['end_subscribe'])){
                             
-                            $delete_subscribe="DELETE FROM subscribe where user_id={$_SESSION['usr_id']}";
+                            $delete_subscribe="DELETE FROM subscribe where customer_id={$_SESSION['usr_id']}";
                             mysqli_query($con,$delete_subscribe);
                             echo"<script> document.getElementById('error_head').innerHTML = ''; </script>";
                             echo"<script> document.getElementById('error_body').innerHTML = ''; </script>";
                             echo"<script> document.getElementById('error_head').innerHTML = ''; </script>";
                             echo"<script> document.getElementById('error_link').innerHTML = ''; </script>"; 
+                            echo "<script> location.replace('index.php'); </script>";
                             
-                            echo "<script>
-                                $('document').ready(function(){
-                                $('#end_sbus_hide').hide();
-                                 });
-                                    </script>";
                           }
+
+    //---------------------------------------------------------------------------Find my coupon------------------------------------------------------------------//
+    
 
 ?>
