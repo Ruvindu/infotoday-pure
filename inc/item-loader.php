@@ -14,7 +14,7 @@
   			$thumbnail = base64_encode($item['thumbnail']);
 
   			echo " <div class=\"col-lg-3 col-md-5 mb-2\" >
-                <div class=\"card\" style=\"width: 15rem;background-color: rgba(245, 245, 245, -5);\">
+                <div class=\"card\" style=\"width: 18rem;background-color: rgba(245, 245, 245, -5);\">
                 <img class=\"card-img-top\" src=\"data:image/jpeg;base64,{$thumbnail}\" alt=\"Thumbnail\" >
                     <div class=\"card-body\">
                     <h5 class=\"card-title\">{$item['name']}</h5>
@@ -76,7 +76,7 @@
         $thumbnail = base64_encode($item['thumbnail']);
 
         echo " <div class=\"col-lg-3 col-md-5 mb-2\" >
-                <div class=\"card\" style=\"width: 15rem;background-color: rgba(245, 245, 245, -5);\">
+                <div class=\"card\" style=\"width: 18rem;background-color: rgba(245, 245, 245, -5);\">
                 <img class=\"card-img-top\" src=\"data:image/jpeg;base64,{$thumbnail}\" alt=\"Thumbnail\" >
                     <div class=\"card-body\">
                     <h5 class=\"card-title\">{$item['name']}</h5>
@@ -138,7 +138,7 @@
   			$thumbnail = base64_encode($item['thumbnail']);
 
   			echo " <div class=\"col-lg-3 col-md-5 mb-2\" >
-                <div class=\"card\" style=\"width: 15rem;background-color: rgba(245, 245, 245, -5);\">
+                <div class=\"card\" style=\"width: 18rem;background-color: rgba(245, 245, 245, -5);\">
                 <img class=\"card-img-top\" src=\"data:image/jpeg;base64,{$thumbnail}\" alt=\"Thumbnail\" >
                     <div class=\"card-body\">
                     <h5 class=\"card-title\">{$item['name']}</h5>

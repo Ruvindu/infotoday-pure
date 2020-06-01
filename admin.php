@@ -102,61 +102,198 @@
             
             <div class="row mt-4">
 
-              <div class="col++++-12">
+              <div class="col-12">
 
-                <h4><font color="#34a5eb">P</font>ending <font color="#34a5eb">N</font>ewspapers</h4><br>
-                <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <div class="card" >
+                    <div class="card-body">
+                      <h5 class="card-title"><font color="#34a5eb">P</font>ending <font color="#34a5eb">N</font>ewspapers</h5>
 
-                    <table class="table table-bordered table-striped mb-0">
-                      <thead>
-                        <tr>
-                          <th scope="col">Name</th>
-                          <th scope="col">Gross price</th>
-                          <th scope="col">Supplier</th>
-                          <th scope="col">Publish duration</th>
-                          <th scope="col">Description</th>
-                          <th scope="col">Date</th>
-                          <th scope="col">Category</th>
-                          <th scope="col">File</th>
-                          <th scope="col">Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
+                      <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                        <table class="table table-bordered table-striped mb-0">
+                          <thead>
+                            <tr>
+                              <th scope="col">Name</th>
+                              <th scope="col">Gross price</th>
+                              <th scope="col">Supplier</th>
+                              <th scope="col">Publish duration</th>
+                              <th scope="col">Description</th>
+                              <th scope="col">Date</th>
+                              <th scope="col">Category</th>
+                              <th scope="col">File</th>
+                              <th scope="col">Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
 
-                        <?php 
+                            <?php 
 
-                            $get_pendingQ = "SELECT `newspaper`.* , `category`.* , `user`.* FROM `newspaper`, `category` , `user` WHERE `status` = 'pending' AND `newspaper`.`category_id` = `category`.`category_id` AND `newspaper`.`supplier_id` = `user`.`user_id`";
+                                $get_pendingQ = "SELECT `newspaper`.* , `category`.* , `user`.* FROM `newspaper`, `category` , `user` WHERE `status` = 'pending' AND `newspaper`.`category_id` = `category`.`category_id` AND `newspaper`.`supplier_id` = `user`.`user_id`";
 
-                            $res_pending = mysqli_query($con,$get_pendingQ);
+                                $res_pending = mysqli_query($con,$get_pendingQ);
 
-                            if ($res_pending) {
-                              
-                                while ($PI= mysqli_fetch_assoc($res_pending)) {
-                                                                        
-                                    echo "<tr>
-                                            <th scope=\"row\">{$PI['name']}</th>
-                                            <td>Rs.{$PI['gross_price']}</td>
-                                            <td>{$PI['first_name']} {$PI['last_name']}</td>
-                                            <td>{$PI['Publish_duration']}</td>
-                                            <td>{$PI['description']}</td>
-                                            <td>{$PI['date']}</td>
-                                            <td>{$PI['category_name']}</td>
-                                            <td> <a href='{$PI['file']}' traget='_blank' class='btn btn-outline-primary'>View</a></td>
+                                if ($res_pending) {
+                                  
+                                    while ($PI= mysqli_fetch_assoc($res_pending)) {
+                                                                            
+                                        echo "<tr>
+                                                <th scope=\"row\">{$PI['name']}</th>
+                                                <td>Rs.{$PI['gross_price']}</td>
+                                                <td>{$PI['first_name']} {$PI['last_name']}</td>
+                                                <td>{$PI['Publish_duration']}</td>
+                                                <td>{$PI['description']}</td>
+                                                <td>{$PI['date']}</td>
+                                                <td>{$PI['category_name']}</td>
+                                                <td> <a href='{$PI['file']}' traget='_blank' class='btn btn-outline-primary'>View</a></td>
 
-                                            <td><a href='admin.php?action={$PI['newspaper_id']}' traget='_blank' class='btn btn-outline-danger'>Approve</a> </td>
+                                                <td><a href='admin.php?action={$PI['newspaper_id']}' traget='_blank' class='btn btn-outline-danger'>Approve</a> </td>
 
-                                          </tr>";
+                                              </tr>";
+                                    }
                                 }
-                            }
 
-                         ?>
-                        
-                      </tbody>
-                    </table>
+                             ?>
+                            
+                          </tbody>
+                        </table>
 
-                  </div>
+                      </div>
+                      
+                    </div>
+                </div>
 
               </div>
+
+              <div class="col-3">
+                  <div class="card mt-3" style="width:200px;">
+                    <div class="card-body">
+                      <h5 class="card-title">Active Customers</h5>
+                      
+                      <font class="card-text" style="font-size: 40px" color="#34a5eb">
+                      <?php
+                          $countQ = "SELECT count(`role`) as `count` FROM `user` WHERE `role`='customer'";
+                          $result = mysqli_query($con,$countQ);
+                          if ($result) {
+                            echo mysqli_fetch_assoc($result)['count'];
+                          }
+                      ?>
+                      </font>
+                      
+                    </div>
+                  </div>
+              </div>
+
+              <div class="col-3">
+                  <div class="card mt-3" style="width:200px;">
+                    <div class="card-body">
+                      <h5 class="card-title">Active suppliers</h5>
+                      
+                      <font class="card-text" style="font-size: 40px" color="#34a5eb">
+                      <?php
+                          $countQ = "SELECT count(`role`) as `count` FROM `user` WHERE `role`='supplier'";
+                          $result = mysqli_query($con,$countQ);
+                          if ($result) {
+                            echo mysqli_fetch_assoc($result)['count'];
+                          }
+                      ?>
+                      </font>
+                      
+                    </div>
+                  </div>
+              </div>
+                
+              <div class="col-3">
+                  <div class="card mt-3" style="width:240px;">
+                    <div class="card-body">
+                      <h5 class="card-title">Available newspapers</h5>
+                      
+                      <font class="card-text" style="font-size: 40px" color="#34a5eb">
+                      <?php
+                          $countQ = "SELECT COUNT(*) as `count` FROM `newspaper`";
+                          $result = mysqli_query($con,$countQ);
+                          if ($result) {
+                            echo mysqli_fetch_assoc($result)['count'];
+                          }
+                      ?>
+                      </font>
+                      
+                    </div>
+                  </div>
+              </div>
+              
+               <div class="col-3">
+                  <div class="card mt-3" style="width:240px;">
+                    <div class="card-body">
+                      <h5 class="card-title">Sales</h5>
+                      
+                      <font class="card-text" style="font-size: 40px" color="#34a5eb">
+                      <?php
+                          $countQ = "SELECT COUNT(*) as `count` FROM `purchases`";
+                          $result = mysqli_query($con,$countQ);
+                          if ($result) {
+                            echo mysqli_fetch_assoc($result)['count'];
+                          }
+                      ?>
+                      </font>
+                      
+                    </div>
+                  </div>
+              </div>
+
+
+              <div class="col-12 mt-5">
+                <div class="card" >
+                    <div class="card-body">
+                      <h5 class="card-title"><font color="#34a5eb">P</font>ackages</h5>
+
+                <form action="admin.php" method="post">
+                <table class="table table-striped ">
+                  <thead>
+                    <tr>
+                      <th scope="col">Package name</th>
+                      <th scope="col">Price</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Lite 1 month</th>
+                      <td> 
+                        <div class="form-group row">
+                          <label for="inputEmail3" class="col-sm-2 col-form-label">Rs.</label>
+                            <div class="col-sm-10">
+                              <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                            </div>
+                          </div>
+
+                        Rs.<input type="type" name="price" value="Save" class="form-control text_width"></td>
+                      <td><input type="submit" name="save" value="Save" class="btn btn-primary"></td>
+                     
+                    </tr>
+                    <tr>
+                      <td>Lite 1 year</th>
+                      <td><div class="form-group">Rs.<input type="type" name="price" value="Save" class="form-control text_width"></div></td>
+                      <td><input type="submit" name="save" value="Save" class="btn btn-primary"></td>
+                    
+                    </tr>
+                    <tr>
+                      <td>Golden 1 month</th>
+                      <td>Rs.<input type="type" name="price" value="Save" class="form-control text_width"></td>
+                      <td><input type="submit" name="save" value="Save" class="btn btn-primary"></td>
+                   
+                    </tr>
+                    <tr>
+                      <td>Golden 1 year</th>
+                      <td>Rs.<input type="type" name="price" value="Save" class="form-control text_width"></td>
+                      <td><input type="submit" name="save" value="Save" class="btn btn-primary"></td>
+                     
+                    </tr>
+                  </tbody>
+                </table>
+
+              </div>
+
+            </div>
+          </div>
 
                 
 
