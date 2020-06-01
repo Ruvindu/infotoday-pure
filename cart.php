@@ -192,7 +192,15 @@
                         //$InsertToPurches="INSERT INTO purchases (net_ammount,customer_id)VALUES('$total','$user_id')";
                           //mysqli_query($con,$InsertToPurches);
                         $_SESSION['cart_total']=$total;
-                        echo "<script> location.replace('paymentmethod.php'); </script>";
+                         
+                        if($total != null){
+                          unset($_SESSION['amount']);
+                           echo "<script> location.replace('paymentmethod.php'); </script>";
+                        }else{
+                          unset($_SESSION['cart_total']);
+                        }
+
+                       
 
                       }
                     if(isset($_POST['DeleteFromCart']))
