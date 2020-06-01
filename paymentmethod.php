@@ -270,13 +270,13 @@
 </body>
 </html>
 <?php
-  echo "<script>
+   echo "<script>
         $('document').ready(function(){
         $('#end_sbus_hide').hide();
                                 });
         </script>";
                              
-        $chech_to_subscribe="SELECT * FROM subscribe WHERE user_id={$_SESSION['usr_id']}";
+        $chech_to_subscribe="SELECT * FROM subscribe WHERE customer_id={$_SESSION['usr_id']}";
             $apply_subscribe_results=mysqli_fetch_assoc(mysqli_query($con,$chech_to_subscribe));
 		          if(isset($_POST['paysubmit'])){
 
