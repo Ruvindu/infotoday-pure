@@ -4,6 +4,15 @@
 
   require_once("inc/connection.php");
   session_start();
+
+
+  /* approve pending newspapers*/
+
+  if (isset($_GET['action'])) {
+      $approveQ = "UPDATE `newspaper` SET `status`='approved' WHERE `newspaper_id`= {$_GET['action']}";
+      mysqli_query($con,$approveQ);
+  }
+
   
 ?>
 
@@ -93,7 +102,7 @@
             
             <div class="row mt-4">
 
-              <div class="col-12">
+              <div class="col++++-12">
 
                 <h4><font color="#34a5eb">P</font>ending <font color="#34a5eb">N</font>ewspapers</h4><br>
                 <div class="table-wrapper-scroll-y my-custom-scrollbar">
@@ -118,43 +127,30 @@
 
                             $get_pendingQ = "SELECT `newspaper`.* , `category`.* , `user`.* FROM `newspaper`, `category` , `user` WHERE `status` = 'pending' AND `newspaper`.`category_id` = `category`.`category_id` AND `newspaper`.`supplier_id` = `user`.`user_id`";
 
+                            $res_pending = mysqli_query($con,$get_pendingQ);
+
+                            if ($res_pending) {
+                              
+                                while ($PI= mysqli_fetch_assoc($res_pending)) {
+                                                                        
+                                    echo "<tr>
+                                            <th scope=\"row\">{$PI['name']}</th>
+                                            <td>Rs.{$PI['gross_price']}</td>
+                                            <td>{$PI['first_name']} {$PI['last_name']}</td>
+                                            <td>{$PI['Publish_duration']}</td>
+                                            <td>{$PI['description']}</td>
+                                            <td>{$PI['date']}</td>
+                                            <td>{$PI['category_name']}</td>
+                                            <td> <a href='{$PI['file']}' traget='_blank' class='btn btn-outline-primary'>View</a></td>
+
+                                            <td><a href='admin.php?action={$PI['newspaper_id']}' traget='_blank' class='btn btn-outline-danger'>Approve</a> </td>
+
+                                          </tr>";
+                                }
+                            }
+
                          ?>
-                        <tr>
-                          <th scope="row">1</th>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">2</th>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                          <td>@fat</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">3</th>
-                          <td>Larry</td>
-                          <td>the Bird</td>
-                          <td>@twitter</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">4</th>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">5</th>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                          <td>@fat</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">6</th>
-                          <td>Larry</td>
-                          <td>the Bird</td>
-                          <td>@twitter</td>
-                        </tr>
+                        
                       </tbody>
                     </table>
 

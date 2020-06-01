@@ -22,9 +22,9 @@
       
          $imgData = addslashes(file_get_contents($_FILES['thumbnail']['tmp_name']));
 
-         $publishQ = "INSERT INTO `newspaper`(`name`, `gross_price`, `supplier_id`, `Publish_duration`, `thumbnail`, `description`, `date`, `category_id`, `file`) VALUES ('{$_POST['newspaper_name']}',{$_POST['gross_price']},{$_SESSION['usr_id']},'{$_POST['duration']}','{$imgData}','{$_POST['description']}','{$_POST['date']}',{$_POST['category']}, '{$path_for_save}')";
+         $publishQ = "INSERT INTO `newspaper`(`name`, `gross_price`, `supplier_id`, `Publish_duration`, `thumbnail`, `description`, `date`, `category_id`, `file`, `status`) VALUES ('{$_POST['newspaper_name']}',{$_POST['gross_price']},{$_SESSION['usr_id']},'{$_POST['duration']}','{$imgData}','{$_POST['description']}','{$_POST['date']}',{$_POST['category']}, '{$path_for_save}','pending')";
 
-
+         
          if(mysqli_query($con,$publishQ)){
             echo "<script>alert('File uploaded.')</script>";
          }

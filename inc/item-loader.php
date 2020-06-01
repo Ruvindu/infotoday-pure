@@ -3,7 +3,7 @@
   //category wise
   if (isset($_GET['item'])) {
   	
-  	$get_selected_itemsQ = "SELECT * FROM `newspaper` WHERE `name` = '{$_GET['item']}'";
+  	$get_selected_itemsQ = "SELECT * FROM `newspaper` WHERE `name` = '{$_GET['item']}' AND `status`='approved'";
 
   	$get_selected_itemsQ = mysqli_query($con, $get_selected_itemsQ);
 
@@ -23,7 +23,7 @@
                     if (isset($_SESSION['usr_id'])) {
 
                       /* check item subscribed*/
-                      $is_subscribed = "SELECT * FROM `subscribe` WHERE `customer_id`={$_SESSION['usr_id']} AND `newspaper_id`={$item['newspaper_id']}";
+                      $is_subscribed = "SELECT * FROM `subscribe` WHERE `customer_id`={$_SESSION['usr_id']} AND `newspaper_id`={$item['newspaper_id']} ";
 
                       $res_is_subscribed =  mysqli_query($con,$is_subscribed);
                       if (0<mysqli_num_rows($res_is_subscribed)) {
@@ -65,7 +65,7 @@
   //By search
   else if (isset($_GET['search'])) {
       
-    $get_search_itemsQ = "SELECT * FROM `newspaper` WHERE `name` LIKE '%{$_GET['search-query']}%' OR `description` LIKE '%{$_GET['search-query']}%' OR  `date` LIKE '%{$_GET['search-query']}%'; ";
+    $get_search_itemsQ = "SELECT * FROM `newspaper` WHERE `name` LIKE '%{$_GET['search-query']}%' OR `description` LIKE '%{$_GET['search-query']}%' OR  `date` LIKE '%{$_GET['search-query']}%' AND `status`='approved'; ";
 
     $res_search_items = mysqli_query($con, $get_search_itemsQ);
 
@@ -127,7 +127,7 @@
   //All items
   else{
 
-  	$get_selected_itemsQ = "SELECT * FROM `newspaper`";
+  	$get_selected_itemsQ = "SELECT * FROM `newspaper` WHERE `status`='approved'";
 
   	$get_selected_itemsQ = mysqli_query($con, $get_selected_itemsQ);
 
