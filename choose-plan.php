@@ -133,10 +133,10 @@
         			<div class="card-body text-center ">
      <!---------------------------------------------------------Table start--------------------------------------------------------------------->   
                 <?php
-                $lite_1month_price='Rs.1100.50';
-                $lite_1year_price='Rs.9000.00';
-                $gold_1month_price='Rs.5100.50';
-                $gold_1year_price='Rs.15000.00';
+                $lite_1month_price='Rs.' . mysqli_fetch_assoc(mysqli_query($con,"SELECT * FROM `package` WHERE `pkg_name`='Lite 1 month'" ))['price'];
+                $lite_1year_price='Rs.'. mysqli_fetch_assoc(mysqli_query($con,"SELECT * FROM `package` WHERE `pkg_name`='Lite 1 year'" ))['price'];
+                $gold_1month_price='Rs.' . mysqli_fetch_assoc(mysqli_query($con,"SELECT * FROM `package` WHERE `pkg_name`='Golden 1 month'" ))['price'];
+                $gold_1year_price='Rs.' . mysqli_fetch_assoc(mysqli_query($con,"SELECT * FROM `package` WHERE `pkg_name`='Golden 1 year'" ))['price'];
                 
                 ?>				
         				<table style=" margin-top: 10px; ">

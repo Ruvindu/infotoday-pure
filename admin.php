@@ -240,12 +240,46 @@
               </div>
 
 
+              <?php
+
+
+                  $lite1month = mysqli_fetch_assoc(mysqli_query($con,"SELECT * FROM `package` WHERE `pkg_name`='Lite 1 month'" ))['price'];
+                  $lite1year = mysqli_fetch_assoc(mysqli_query($con,"SELECT * FROM `package` WHERE `pkg_name`='Lite 1 year'" ))['price'];
+                  $gold1month = mysqli_fetch_assoc(mysqli_query($con,"SELECT * FROM `package` WHERE `pkg_name`='Golden 1 month'" ))['price'];
+                  $gold1year = mysqli_fetch_assoc(mysqli_query($con,"SELECT * FROM `package` WHERE `pkg_name`='Golden 1 year'" ))['price'];
+
+                  
+
+                  /*add new price to pkgs*/
+                  if (isset($_POST['save'])) {
+                    
+
+                    $res_count = mysqli_query( $con,"SELECT COUNT(*) as `count` FROM `package` WHERE `pkg_name`='{$_POST['pkg']}' ");
+
+                    if (1 == mysqli_fetch_assoc($res_count)['count']) {
+                      $add_pkgQ = "UPDATE `package` SET `price`= {$_POST['price']} WHERE `pkg_name`='{$_POST['pkg']}'";
+                    }else{
+                      $add_pkgQ = "INSERT INTO `package` (`pkg_name`,`price`) VALUES ('{$_POST['pkg']}' ,{$_POST['price']} ) ";
+                    }
+
+                    
+                    $res_addpkg = mysqli_query($con, $add_pkgQ);
+
+                    if($res_addpkg){
+                        echo "<script>alert('Successfuly update package.')</script>";
+                    }
+                  }
+
+
+              ?>
+
+
               <div class="col-12 mt-5">
                 <div class="card" >
                     <div class="card-body">
                       <h5 class="card-title"><font color="#34a5eb">P</font>ackages</h5>
 
-                <form action="admin.php" method="post">
+                
                 <table class="table table-striped ">
                   <thead>
                     <tr>
@@ -256,36 +290,64 @@
                   </thead>
                   <tbody>
                     <tr>
+                      <form action="admin.php" method="post">
                       <td>Lite 1 month</th>
                       <td> 
                         <div class="form-group row">
-                          <label for="inputEmail3" class="col-sm-2 col-form-label">Rs.</label>
-                            <div class="col-sm-10">
-                              <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-                            </div>
+                          <label for="price" class="col-sm-1 col-form-label">Rs.</label>
+                             <input type="type" name="price" value=<?php echo "'{$lite1month}'"; ?> class="form-control text_width">
                           </div>
-
-                        Rs.<input type="type" name="price" value="Save" class="form-control text_width"></td>
-                      <td><input type="submit" name="save" value="Save" class="btn btn-primary"></td>
-                     
+                       </td>
+                      <td>
+                        <input type="hidden" name="pkg" value="Lite 1 month" >
+                        <input type="submit" name="save" value="Save" class="btn btn-primary">  
+                      </td>
+                     </form>
                     </tr>
                     <tr>
+                      <form action="admin.php" method="post">
                       <td>Lite 1 year</th>
-                      <td><div class="form-group">Rs.<input type="type" name="price" value="Save" class="form-control text_width"></div></td>
-                      <td><input type="submit" name="save" value="Save" class="btn btn-primary"></td>
-                    
+                      <td> 
+                        <div class="form-group row">
+                          <label for="price" class="col-sm-1 col-form-label">Rs.</label>
+                             <input type="type" name="price" value=<?php echo "'{$lite1year}'"; ?> class="form-control text_width">
+                          </div>
+                       </td>
+                      <td>
+                        <input type="hidden" name="pkg" value="Lite 1 year" >
+                        <input type="submit" name="save" value="Save" class="btn btn-primary">  
+                      </td>
+                      </form>
                     </tr>
                     <tr>
+                      <form action="admin.php" method="post">
                       <td>Golden 1 month</th>
-                      <td>Rs.<input type="type" name="price" value="Save" class="form-control text_width"></td>
-                      <td><input type="submit" name="save" value="Save" class="btn btn-primary"></td>
-                   
+                      <td> 
+                        <div class="form-group row">
+                          <label for="price" class="col-sm-1 col-form-label">Rs.</label>
+                             <input type="type" name="price" value=<?php echo "'{$gold1month}'"; ?> class="form-control text_width">
+                          </div>
+                       </td>
+                      <td>
+                        <input type="hidden" name="pkg" value="Golden 1 month" >
+                        <input type="submit" name="save" value="Save" class="btn btn-primary">  
+                      </td>
+                      </form>
                     </tr>
                     <tr>
+                      <form action="admin.php" method="post">
                       <td>Golden 1 year</th>
-                      <td>Rs.<input type="type" name="price" value="Save" class="form-control text_width"></td>
-                      <td><input type="submit" name="save" value="Save" class="btn btn-primary"></td>
-                     
+                      <td> 
+                        <div class="form-group row">
+                          <label for="price" class="col-sm-1 col-form-label">Rs.</label>
+                             <input type="type" name="price" value=<?php echo "'{$gold1year}'"; ?> class="form-control text_width">
+                          </div>
+                       </td>
+                      <td>
+                        <input type="hidden" name="pkg" value="Golden 1 year" >
+                        <input type="submit" name="save" value="Save" class="btn btn-primary">  
+                      </td>
+                     </form>
                     </tr>
                   </tbody>
                 </table>
