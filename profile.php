@@ -170,7 +170,8 @@
                                 Phone  : <input type="text" placeholder="Phone" name="phone" style=""><br><br>
                                 Email  : <input type="text" placeholder="Email" name="email" style="margin-left: 7px;"><br><br>
                                 Joined  : <input type="text" placeholder="Joined" name="date" style="margin-left: -1px;"><br><br>
-                                <input type="submit" name="add_data"  class="btn btn-primary" value="submit">
+                                <input type="submit" name="add_data"  class="btn btn-primary" value="Submit">
+                                <input type="submit" name="go_back" class="btn btn-danger" value="Back">
                               </div>
                               
                                 
@@ -268,8 +269,25 @@
       <?php
 
           if (isset($_POST['remove_profile'])) {
-            $removeQ = "UPDATE user SET avatar=NULL WHERE user_id={$_SESSION['usr_id']}";
+            $removeQ = "UPDATE user SET avatar=null WHERE user_id={$_SESSION['usr_id']}";
             mysqli_query($con,$removeQ);
+             echo " <script type='text/javascript'>
+
+                              (function()
+                                        {
+                                  if( window.localStorage )
+                                       {
+                                    if( !localStorage.getItem('firstLoad') )
+                                          {
+                                      localStorage['firstLoad'] = true;
+                                        window.location.reload();
+                                    }  
+                                   else
+                                    localStorage.removeItem('firstLoad');
+                                  }
+                                })();
+
+                              </script>";
             
             $_SESSION['usr_avatar'] = NULL;
           }

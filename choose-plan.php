@@ -133,10 +133,17 @@
         			<div class="card-body text-center ">
      <!---------------------------------------------------------Table start--------------------------------------------------------------------->   
                 <?php
-                $lite_1month_price='Rs.1100.50';
-                $lite_1year_price='Rs.9000.00';
-                $gold_1month_price='Rs.5100.50';
-                $gold_1year_price='Rs.15000.00';
+                $select_packages="SELECT * FROM package";
+                $packages_results=mysqli_query($con,$select_packages);
+                $packages_record=mysqli_fetch_assoc($packages_results);
+                
+                $lite_1month_price=  $packages_record['price'];
+                 $packages_record=mysqli_fetch_assoc( $packages_results);
+                $lite_1year_price=  $packages_record['price'];
+                 $packages_record=mysqli_fetch_assoc( $packages_results);
+                $gold_1month_price= $packages_record['price'];
+                 $packages_record=mysqli_fetch_assoc( $packages_results);
+                $gold_1year_price= $packages_record['price'];
                 
                 ?>				
         				<table style=" margin-top: 10px; ">
@@ -176,7 +183,7 @@
         					</tr>
         					<tr>
         						<td class="package_shaow_table lead">
-        							 Free 3 coupon available 
+        							 Free  coupon available 
         						</td>
         						<td class="package_shaow_table blockquote" id="coupon3">
         							Yes
@@ -198,13 +205,13 @@
         					</tr>
                   <tr>
                     <td class="package_shaow_table lead">
-                       Shear with 4 members
+                      
                     </td>
                     <td class="package_shaow_table blockquote" id="shear4">
                       
                     </td>
                     <td class="package_shaow_table blockquote">
-                      Yes
+                     
                     </td>
                   </tr>
         				</table>
@@ -235,7 +242,6 @@
     <script> document.getElementById('magazin_descript').innerHTML =   '' </script>
 		<script> document.getElementById('1month_gold').innerHTML =   '$gold_1month_price' </script>
     <script> document.getElementById('1year_gold').innerHTML =   '$gold_1year_price' </script>
-    <script> document.getElementById('shear4').innerHTML =   'Yes' </script>
     <script> document.getElementById('coupon3').innerHTML =   'Yes' </script>
     ";
 
@@ -269,7 +275,6 @@ if(isset($_POST['lite']) || $x==0){
       <script> document.getElementById('magazin_name').innerHTML =   '$newspaper_name' </script>
       <script> document.getElementById('1month_lite').innerHTML =   '$lite_1month_price' </script>
       <script> document.getElementById('1year_lite').innerHTML =   '$lite_1year_price' </script>
-      <script> document.getElementById('shear4').innerHTML =   'No' </script>
       <script> document.getElementById('coupon3').innerHTML =   'No' </script>";
       
       echo " <script>$('document').ready(function(){

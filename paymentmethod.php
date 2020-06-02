@@ -204,7 +204,7 @@
         							<tr>
         								
         								<th class="text-center"><br>
-        									Check your coupon&emsp;&emsp; <button style="margin-right: -70px;background-color:  white;border: none;"><a couponfind>+</a></button> 
+        									Check your coupon&emsp;&emsp; <button style="margin-right: -70px;background-color:  white;border: none;"><a href="profile.php">+</a></button> 
         								</th>
         							</tr>
                       </form>
@@ -314,6 +314,8 @@
                                  });
                                     </script>";
                           }
+                          $add_to_purchas="INSERT INTO purchases  (net_ammount,customer_id) VALUES ('".$_SESSION['amount']."',{$_SESSION['usr_id']})";
+                          mysqli_query($con,$add_to_purchas);
                        }
                           
 
@@ -325,6 +327,9 @@
                       
                             $but_query="INSERT INTO buy  SELECT * FROM cart WHERE user_id={$_SESSION['usr_id']}";
                             mysqli_query($con,$but_query);
+
+                            $add_to_purchas="INSERT INTO purchases  (net_ammount,customer_id) VALUES ('".$_SESSION['cart_total']."',{$_SESSION['usr_id']})";
+                            mysqli_query($con,$add_to_purchas);
 
                             echo "<script> location.replace('index.php'); </script>";
                           }
