@@ -266,8 +266,27 @@
                     $res_addpkg = mysqli_query($con, $add_pkgQ);
 
                     if($res_addpkg){
-                        echo "<script>alert('Successfuly update package.')</script>";
+                        //echo "<script>alert('Successfuly update package.')</script>";
                     }
+
+                    echo " <script type='text/javascript'>
+
+
+                              (function()
+                                        {
+                                  if( window.localStorage )
+                                       {
+                                    if( !localStorage.getItem('firstLoad') )
+                                          {
+                                      localStorage['firstLoad'] = true;
+                                        window.location.reload();
+                                    }  
+                                   else
+                                    localStorage.removeItem('firstLoad');
+                                  }
+                                })();
+
+                              </script>";
                   }
 
 
