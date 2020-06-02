@@ -72,7 +72,7 @@
                     <?php
 
                       if (isset($_SESSION['usr_id'])) {
-                        echo "<a class=\"navbar-brand\" href=\"profile.php\">";
+                        echo "<a class=\"navbar-brand\" href=\"#\">";
 
                         if ($_SESSION['usr_avatar']!=NULL) {
                           echo "<img src=\"data:image/jpeg;base64,{$_SESSION['usr_avatar']}\" width=\"30\" height=\"30\" class=\"d-inline-block align-top profile_border\" >";
