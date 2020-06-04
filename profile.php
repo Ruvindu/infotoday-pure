@@ -231,7 +231,7 @@
                                 $show_coupon="SELECT * FROM coupon , subscribe WHERE coupon.coupon_id=subscribe.coupon_id and subscribe.customer_id={$_SESSION['usr_id']}";
                                $show_coupon_result=mysqli_fetch_assoc(mysqli_query($con,$show_coupon));
                                if($show_coupon_result != null){
-                              echo "<h5 style=\"color:red;\">Amezing ! ,You got one coupon</h5>";
+                              echo "<h5 style=\"color:red;\">Amazing ! ,You got one coupon</h5>";
                                echo "Your coupon code :".$show_coupon_result['coupon_code'];
                                 }
                                 else{
