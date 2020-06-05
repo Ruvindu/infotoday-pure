@@ -125,7 +125,7 @@
         <div class="container-fluid">
             
             <div class="row mt-4">
-                <div class="col-md-4">
+                <div class="col-md-3">
                    
                   <div class="card" style="width: 18rem;">
                     <?php
@@ -185,14 +185,14 @@
                               <h5 class="card-title">Change  password</h5>
                               <form action="profile.php" method="POST">
                                 <div class="form-group">
-                                  <input type="text" name="current_p" class="form-control" placeholder="Current password">
+                                  <input type="password" name="current_p" class="form-control" placeholder="Current password">
                                   <p id="currentpwd" style="font-size: 11px; position: absolute;margin-left: 130px;color: red;"></p>
                                 </div>
                                 <div class="form-group">
-                                  <input type="text" name="new_p" class="form-control" id="newpwd"  placeholder="New password">
+                                  <input type="password" name="new_p" class="form-control" id="newpwd"  placeholder="New password">
                                 </div>
                                 <div class="form-group">
-                                  <input type="text" name="confirm_p" class="form-control" placeholder="Confirm password">
+                                  <input type="password" name="confirm_p" class="form-control" placeholder="Confirm password">
                                   <p id="confirmpwd" style="font-size: 11px; position: absolute;margin-left: 130px;color: red;"></p>
                                 </div>
                                 <button name="changepass" class="btn btn-primary">Save changes</button>
@@ -245,9 +245,33 @@
 
                 </div>
 
-                <div class="col-md-8">
-                    
+                <div class="col-md-9">
+                  
+                  <div class="card">
+                    <div class="card-header">
+                      Purchases
+                    </div>
+                    <div class="card-body">
+                      <div class="card-deck mt-3 ">
+                      <?php
+                          require_once("inc/purchases.php");
+                       ?>
+                     </div>
+                    </div>
+                  </div>
+                 
 
+
+                 <div class="card mt-5">
+                    <div class="card-header">
+                      Subscribes
+                    </div>
+                    <div class="card-body">
+                      <?php
+                          require_once("inc/subscribes.php");
+                       ?>
+                    </div>
+                  </div>
                     
 
                     

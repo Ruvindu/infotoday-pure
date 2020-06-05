@@ -7,12 +7,14 @@
 
   //Throw to card
   if (isset($_GET['id-cart'])) {
-    $insert_onto_cartQ = "INSERT INTO `cart`(`newspaper_id`, `user_id`) VALUES ({$_GET['id-cart']},{$_SESSION['usr_id']})";
+    $insert_into_cartQ = "INSERT INTO `cart`(`newspaper_id`, `user_id`) VALUES ({$_GET['id-cart']},{$_SESSION['usr_id']})";
 
-    $cart_res = mysqli_query($con,$insert_onto_cartQ);
+    $cart_res = mysqli_query($con,$insert_into_cartQ);
+
 
     if ($cart_res) {
         echo "<script>alert('Item added to cart.')</script>";
+        unset($_GET);
     }
   }
 
