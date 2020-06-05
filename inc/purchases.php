@@ -1,9 +1,6 @@
 <?php
 
 	$get_purchased = "SELECT * FROM `newspaper` n ,`buy` b WHERE n.`newspaper_id` = b.`newspaper_id` AND `user_id` = {$_SESSION['usr_id']}";
-
-	//echo $get_purchased;
-
 	$res_purchased = mysqli_query($con,$get_purchased);
 
 	if ($res_purchased) {
