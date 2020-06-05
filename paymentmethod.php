@@ -119,6 +119,7 @@
 
         </div>
         </nav>
+        
         <div class="container">
         	<div class="row">
         		<div class="card-deck ">
@@ -283,13 +284,18 @@
                                 });
         </script>";
                              
-        $chech_to_subscribe="SELECT * FROM subscribe WHERE customer_id={$_SESSION['usr_id']}";
-        $apply_subscribe_results=mysqli_fetch_assoc(mysqli_query($con,$chech_to_subscribe));
+       
+        
+        $chech_gold="SELECT * FROM subscribe WHERE customer_id={$_SESSION['usr_id']} and package='Gold'";
+        $apply_golds=mysqli_fetch_assoc(mysqli_query($con,$chech_gold));
+
 		          if(isset($_POST['paysubmit'])){
 
-                       if(isset($_SESSION['amount'])){
+                      if(isset($_SESSION['amount'])){
 
-                          if($apply_subscribe_results == null){
+                        if($_SESSION['subcript_type'] == 'Gold'){
+
+                          if( $apply_golds == null){
 
                             $expir=$_SESSION['expire'];
                             $user_id=$_SESSION['usr_id'];
@@ -303,7 +309,7 @@
                           }
                           else{
                             echo"<script> document.getElementById('error_head').innerHTML = 'subscribe error'; </script>";
-                            echo"<script> document.getElementById('error_body').innerHTML = 'You already applied a package.<br>If you want apply another package please confirm deactivate current package'; </script>";
+                            echo"<script> document.getElementById('error_body').innerHTML = 'You already applied a <b>Gold</b> package.<br>If you want apply another Gold package please confirm deactivate current package'; </script>";
                             echo"<script> document.getElementById('error_head').innerHTML = 'subscribe error'; </script>";
                             echo"<script> document.getElementById('error_link').innerHTML = 'Click the link for'; </script>"; 
                             echo "<script> location.replace('#subscribe_error'); </script>";
@@ -314,7 +320,23 @@
                                  });
                                     </script>";
                           }
-                          $add_to_purchas="INSERT INTO purchases  (net_ammount,customer_id) VALUES ('".$_SESSION['amount']."',{$_SESSION['usr_id']})";
+                        
+                        }
+                        else{
+
+                            $expir=$_SESSION['expire'];
+                            $user_id=$_SESSION['usr_id'];
+                            $coupon_id=$_SESSION['coupon_id'];
+                            $newspaper_id=$_SESSION['subs_newspaper_id'];
+                            $subcript_type=$_SESSION['subcript_type'];
+
+                            $subscribe_query="INSERT INTO subscribe (expire_date,customer_id,coupon_id,newspaper_id,package)VALUES('$expir','$user_id','$coupon_id', '$newspaper_id','$subcript_type')";
+                            mysqli_query($con,$subscribe_query);
+                            echo "<script> location.replace('index.php'); </script>";
+                        }  
+
+                          $subs_tot=$_SESSION['cart_total'];
+                          $add_to_purchas="INSERT INTO purchases  (net_ammount,customer_id) VALUES ('$subs_tot',{$_SESSION['usr_id']})";
                           mysqli_query($con,$add_to_purchas);
                        }
                           
@@ -327,8 +349,8 @@
                       
                             $but_query="INSERT INTO buy  SELECT * FROM cart WHERE user_id={$_SESSION['usr_id']}";
                             mysqli_query($con,$but_query);
-
-                            $add_to_purchas="INSERT INTO purchases  (net_ammount,customer_id) VALUES ('".$_SESSION['cart_total']."',{$_SESSION['usr_id']})";
+                            $cart_tot=$_SESSION['cart_total'];
+                            $add_to_purchas="INSERT INTO purchases  (net_ammount,customer_id) VALUES ('$cart_tot',{$_SESSION['usr_id']})";
                             mysqli_query($con,$add_to_purchas);
 
                             echo "<script> location.replace('index.php'); </script>";
@@ -347,7 +369,7 @@
    //------------------------------------------------------------------------Coupon code--------------------------------------------------------//                 
     if(isset($_POST['couponsubmit'])){
 
-            $chech_to_apply_coupon="SELECT * FROM subscribe WHERE customer_id={$_SESSION['usr_id']}";       
+            $chech_to_apply_coupon="SELECT * FROM subscribe WHERE customer_id={$_SESSION['usr_id']} and coupon_id='1'";       
             $apply_coupon_results=mysqli_fetch_assoc(mysqli_query($con,$chech_to_apply_coupon));
 
             $get_coupon="SELECT * FROM coupon WHERE coupon_id={$apply_coupon_results['coupon_id']}";       
@@ -358,7 +380,7 @@
                   $_SESSION['cart_total']=$_SESSION['cart_total']-$get_coupon_results['coupon_discount'];
                   echo $_SESSION['cart_total'];
     //-----------------------------------------------------------------------Update coupon detail-----------------------------------------------//
-                  $update_coupon_details="UPDATE subscribe SET coupon_id='0' WHERE customer_id={$_SESSION['usr_id']} ";
+                  $update_coupon_details="UPDATE subscribe SET coupon_id='0' WHERE customer_id= {$_SESSION['usr_id']} and `coupon_id`='1' ORDER BY `subscribe_id` ASC LIMIT 1";
                   mysqli_query($con,$update_coupon_details);
   //-------------------------------------------------------------------------Refresh code----------------------------------------------------//
                   echo " <script type='text/javascript'>
@@ -388,7 +410,7 @@
 
     if(isset($_POST['end_subscribe'])){
                             
-                            $delete_subscribe="DELETE FROM subscribe where customer_id={$_SESSION['usr_id']}";
+                            $delete_subscribe="DELETE FROM subscribe where customer_id={$_SESSION['usr_id']} and package='Gold'";
                             mysqli_query($con,$delete_subscribe);
                             echo"<script> document.getElementById('error_head').innerHTML = ''; </script>";
                             echo"<script> document.getElementById('error_body').innerHTML = ''; </script>";
