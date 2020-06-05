@@ -5,6 +5,10 @@
   require_once("inc/connection.php");
   session_start();
 
+  if (!isset($_SESSION['role']) and $_SESSION['role']!="admin" ) {
+    header("location:sign.php");
+  }
+
 
   /* approve pending newspapers*/
 
@@ -314,7 +318,7 @@
                       <td> 
                         <div class="form-group row">
                           <label for="price" class="col-sm-1 col-form-label">Rs.</label>
-                             <input type="type" name="price" value=<?php echo "'{$lite1month}'"; ?> class="form-control text_width">
+                             <input type="text" name="price" value=<?php echo "'{$lite1month}'"; ?> class="form-control text_width">
                           </div>
                        </td>
                       <td>
@@ -329,7 +333,7 @@
                       <td> 
                         <div class="form-group row">
                           <label for="price" class="col-sm-1 col-form-label">Rs.</label>
-                             <input type="type" name="price" value=<?php echo "'{$lite1year}'"; ?> class="form-control text_width">
+                             <input type="text" name="price" value=<?php echo "'{$lite1year}'"; ?> class="form-control text_width">
                           </div>
                        </td>
                       <td>
@@ -344,7 +348,7 @@
                       <td> 
                         <div class="form-group row">
                           <label for="price" class="col-sm-1 col-form-label">Rs.</label>
-                             <input type="type" name="price" value=<?php echo "'{$gold1month}'"; ?> class="form-control text_width">
+                             <input type="text" name="price" value=<?php echo "'{$gold1month}'"; ?> class="form-control text_width">
                           </div>
                        </td>
                       <td>
@@ -359,7 +363,7 @@
                       <td> 
                         <div class="form-group row">
                           <label for="price" class="col-sm-1 col-form-label">Rs.</label>
-                             <input type="type" name="price" value=<?php echo "'{$gold1year}'"; ?> class="form-control text_width">
+                             <input type="text" name="price" value=<?php echo "'{$gold1year}'"; ?> class="form-control text_width">
                           </div>
                        </td>
                       <td>
@@ -374,6 +378,66 @@
               </div>
 
             </div>
+          </div>
+
+
+          <?php
+
+            if (isset($_POST['insert'])) {
+              
+              $insert_catQ = "INSERT INTO `category` (`category_name`) VALUES ('{$_POST['cat_insert']}')";
+              mysqli_query($con,$insert_catQ );
+            }
+          ?>
+
+          <div class="col-12">
+            <div class="card mt-5" >
+                    <div class="card-body">
+                      <h5 class="card-title"><font color="#34a5eb">C</font>ategory</h5>
+
+                      <form action="admin.php" method="post">
+                    
+                        <div class="form-group row">
+                          <label for="cat_insert" class="col-sm-2 col-form-label">Insert category</label>
+                            <input type="text" name="cat_insert" class="form-control text_width">
+                            <input type="submit" name="insert" value="Insert" class="btn btn-primary ml-2">  
+                          </div>
+                       
+                     <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th scope="col">Category name</th>
+                       </tr>
+                      </thead>
+                      <tbody>
+
+                        <?php
+
+                            $get_catsQ = "SELECT * FROM `category`";
+
+                                  $res_cats = mysqli_query($con, $get_catsQ);
+
+                                  if ($res_cats) {
+                                    
+                                     while($cat = mysqli_fetch_assoc($res_cats)){
+                                        echo "<tr>                    
+                                                <td>{$cat['category_name']}</td>
+                                              </tr>";
+
+                                     }
+                                  }
+                        ?>
+                       
+                        
+                      </tbody>
+                    </table>
+                       
+                       
+                     
+                     </form>
+
+                    </div>
+              </div>
           </div>
 
                 
