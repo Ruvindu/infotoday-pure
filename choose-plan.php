@@ -306,10 +306,15 @@ $user_id=$_SESSION['usr_id'];
 
 if(isset($_POST['1month_lite'])){
 
-  $mydate=getdate(date("U"));
+  /*$mydate=getdate(date("U"));
   $date=date_create( $mydate['month']- $mydate['mday']- $mydate['year']);
   date_add($date,date_interval_create_from_date_string("30 days"));
-  $expired_date= date_format($date,"Y-M-d");
+  $expired_date= date_format($date,"Y-M-d");*/
+
+  $date = new DateTime(date('Y-m-d'));
+  $date->modify('+30 day');
+  $expired_date = $date->format('Y-M-d');
+
 
   $_SESSION['newspaper_name']=$newspaper_name;
   $_SESSION['duration']='1 Month';
