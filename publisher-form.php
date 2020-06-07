@@ -24,9 +24,11 @@
 
          $publishQ = "INSERT INTO `newspaper`(`name`, `gross_price`, `supplier_id`, `Publish_duration`, `thumbnail`, `description`, `date`, `category_id`, `file`, `status`) VALUES ('{$_POST['newspaper_name']}',{$_POST['gross_price']},{$_SESSION['usr_id']},'{$_POST['duration']}','{$imgData}','{$_POST['description']}','{$_POST['date']}',{$_POST['category']}, '{$path_for_save}','pending')";
 
-         
+
          if(mysqli_query($con,$publishQ)){
             echo "<script>alert('File uploaded.')</script>";
+         }else{
+            echo "<script>alert('File could not uploaded.')</script>";
          }
 
     }
@@ -245,7 +247,7 @@
                       <tr>
                         <td align="right"> 
                           <div class="form-group">
-                            <input type="submit" name="publish" value="Publish now" class="btn btn-info" required>
+                            <input type="submit" name="publish" value="Publish now" class="btn btn-info" >
                           </div>
                         </td>
                       </tr>

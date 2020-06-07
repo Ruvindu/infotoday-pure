@@ -143,7 +143,7 @@
                           <button class="btn btn-primary" id="btReload" name="change_profilepic">Change photo</button>
                           <button class="btn btn-danger" id="btRemove" name="remove_profile">Remove</button>
                           <p style="font-size: 15px;"><br>
-                           Thumbnail :<input type="file" name="fileToUpload" id="fileToUpload" >
+                           <input type="file" name="fileToUpload" id="fileToUpload" >
                           </p>
                         </form>
                       </div>

@@ -5,6 +5,10 @@
   require_once("inc/connection.php");
   session_start();
 
+  if (!isset($_SESSION['usr_id'])) {
+    header("location:sign.php");
+  }
+
 ?>
 
 
