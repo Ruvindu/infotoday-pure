@@ -198,22 +198,22 @@
                           <div class="carousel-item active">
                             <img src="imgs/carousel/1.jpg" class="d-block w-100" alt="...">
                             <div class="carousel-caption d-none d-md-block">
-                              <h5>First slide label</h5>
-                              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                              <h5>Reading is a basic tool in the living of a good life.</h5>
+                              <p>Mortimer J. Adler</p>
                             </div>
                           </div>
                           <div class="carousel-item">
                             <img src="imgs/carousel/2.jpg" class="d-block w-100" alt="...">
                             <div class="carousel-caption d-none d-md-block">
-                              <h5>Second slide label</h5>
-                              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                              <h5>Reading is a discount ticket to everywhere.</h5>
+                              <p>Mary Schmich</p>
                             </div>
                           </div>
                           <div class="carousel-item">
                             <img src="imgs/carousel/3.jpg" class="d-block w-100" alt="...">
                             <div class="carousel-caption d-none d-md-block">
-                              <h5>Third slide label</h5>
-                              <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                              <h5>A good book is an event in my life.</h5>
+                              <p>Stendhal</p>
                             </div>
                           </div>
                         </div>
