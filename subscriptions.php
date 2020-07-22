@@ -126,7 +126,7 @@
 			}
 			else{
 				$p_name=$_GET['name'];
-				$lite_package = "SELECT * FROM `newspaper` n ,`subscribe` b WHERE n.`newspaper_id` = b.`newspaper_id` and `customer_id` = {$_SESSION['usr_id']}  and n.name='$p_name'";
+				$lite_package = "SELECT * FROM `newspaper` n ,`subscribe` b WHERE  `customer_id` = {$_SESSION['usr_id']}  and n.name='$p_name'";
 				$result_package = mysqli_query($con,$lite_package);
 		
 
