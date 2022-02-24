@@ -56,5 +56,5 @@ jobs:
         with:
           app-name: 'rmskweb'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_663E34738C8A4DBCA5A46A445929AE0D }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_651C676531494630B27715FA5701EB1E }}
           package: .
