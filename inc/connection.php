@@ -1,6 +1,9 @@
 <?php
 
-$con = new mysqli("localhost","root",123,"infotoday");
+// $con = new mysqli("localhost","root",123,"infotoday");
+$con=mysqli_init();
+mysqli_ssl_set($con, NULL, NULL, {ca-cert filename}, NULL, NULL);
+mysqli_real_connect($con, "rmskwebdb.mysql.database.azure.com", "ruvindu@rmskwebdb", "rmsk@456", "infotoday", 3306);
 // Check connection
 if ($con -> connect_errno) {
   echo "Failed to connect to MySQL: " . $mysqli -> connect_error;
